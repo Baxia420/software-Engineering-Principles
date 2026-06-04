@@ -1,0 +1,245 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>VIP Student Portal - Authentication</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Newsreader:wght@500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "background": "#fff8f7",
+                        "secondary": "#805600",
+                        "on-primary-container": "#f1817b",
+                        "on-background": "#231919",
+                        "surface-container-low": "#fff0ef",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#ffb3ae",
+                        "surface-bright": "#fff8f7",
+                        "surface-variant": "#f1dedd",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#f7e4e2",
+                        "tertiary": "#00272f",
+                        "inverse-on-surface": "#ffedeb",
+                        "surface-container": "#fdeae8",
+                        "secondary-fixed-dim": "#ffba47",
+                        "on-secondary-fixed": "#291800",
+                        "primary": "#4d0408",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#6e4900",
+                        "surface-container-highest": "#f1dedd",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#614000",
+                        "tertiary-fixed": "#b9ebfa",
+                        "tertiary-container": "#003e4a",
+                        "surface-dim": "#e8d6d4",
+                        "on-surface": "#231919",
+                        "surface-tint": "#9d403d",
+                        "primary-container": "#6b1b1b",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#392e2d",
+                        "on-tertiary-container": "#78a9b7",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#554241",
+                        "on-primary-fixed": "#410004",
+                        "outline": "#897270",
+                        "surface": "#fff8f7",
+                        "on-primary-fixed-variant": "#7e2928",
+                        "secondary-container": "#fdb742",
+                        "secondary-fixed": "#ffddb0",
+                        "on-tertiary-fixed": "#001f26",
+                        "on-tertiary-fixed-variant": "#184d59",
+                        "inverse-primary": "#ffb3ae",
+                        "tertiary-fixed-dim": "#9dcedd",
+                        "outline-variant": "#dcc0be",
+                        "primary-fixed": "#ffdad7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "h3": ["Newsreader"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "h2": ["Newsreader"],
+                        "h1": ["Newsreader"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "600" }],
+                        "h3": ["24px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h2": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "h1": ["40px", { "lineHeight": "1.2", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased min-h-screen flex flex-col md:flex-row">
+<!-- Left Branding Panel (Hidden on mobile) -->
+<div class="hidden md:flex md:w-5/12 lg:w-1/2 relative bg-surface-variant flex-col justify-between overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="University Campus Background" class="w-full h-full object-cover opacity-30 grayscale mix-blend-multiply" data-alt="Menara Razak building at UTM" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9T0ueNty00KYovGVm0njX3pErIGPSYRPA4xBYNNKueQWPvyImk5jdyxVb3Emb86PKjJ3NbtRFi2p-zedUZRLTm12si9xglaY6OHeXLgmOhcAnfM8Z1s7pqoRFYC7eR5sL9VHuSTq3fhGpZgE4CpyQCRjxTdkQ2HT43qPDOQPbz6MgISOKhhPMuG62z2iU-IWSZEV6WR46wLoArf-nhpSiuBts0FzOqcraOvxPnqURP6BTdjP6M8lHX2dfUd6Mk90R95BtMhpjxg">
+</div>
+<div class="absolute inset-0 bg-primary opacity-80 z-10 mix-blend-multiply"></div>
+<div class="relative z-20 p-margin-desktop flex flex-col h-full">
+<div>
+
+<h2 class="font-h1 text-h1 text-white leading-tight max-w-md mt-16">
+                    Academic Excellence &amp; Career Pathways.
+                </h2>
+<p class="font-body-lg text-body-lg text-surface-variant mt-6 max-w-md">
+                    Access the Virtual Internship Portal to connect with premier industry partners and track your professional journey.
+                </p>
+</div>
+<div class="mt-auto">
+<div class="flex gap-4">
+<div class="w-16 h-1 bg-secondary-container rounded-full"></div>
+<div class="w-2 h-1 bg-outline-variant rounded-full opacity-50"></div>
+<div class="w-2 h-1 bg-outline-variant rounded-full opacity-50"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Authentication Panel -->
+<div class="w-full md:w-7/12 lg:w-1/2 flex items-center justify-center p-margin-mobile md:p-margin-desktop min-h-screen relative z-10">
+<div class="w-full max-w-md bg-surface p-8 md:p-12 border border-outline-variant rounded-DEFAULT shadow-sm relative overflow-hidden"><div class="flex mb-4 justify-center"><img alt="UTM Logo" class="h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHf0LQLgkC3OE7wczigkr4yk6zLl0Mez56az_4D7JFeqFIgMKZMM1e79fkJM_AA-WM07hZtG0BTSMUjBCod7TvjN6R3LGGRUgud-sPiJdR3V866BKUDVkCrWUTOS1nJNjbsS9nl1kF9aCqiwM-Rnw1jQKjPDmNyQdqnkOJRJc76Jgvrid26ZbvLAfHGa-5toEnwsAweklk8GzhE-zAxr_nb__bY0uErL4v1lXXr9Cqig8mGBDlfps7OusRxgxJImJNJePCmm4k-A"></div>
+<!-- Warm Amber vertical accent -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary-container"></div>
+<div class="text-center mb-8">
+<h2 class="font-h2 text-h2 text-primary mb-2">VIP Student Portal</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Manage your career development seamlessly.</p>
+</div>
+<!-- Tab Toggles -->
+<div class="flex border-b border-outline-variant mb-8 relative">
+<button class="flex-1 pb-3 text-center font-label-md text-label-md text-primary border-b-2 border-primary transition-colors" id="tab-login" onclick="switchTab('login')">
+                    Log In
+                </button>
+<button class="flex-1 pb-3 text-center font-label-md text-label-md text-on-surface-variant border-b-2 border-transparent hover:text-primary transition-colors" id="tab-register" onclick="switchTab('register')">
+                    Sign Up
+                </button>
+</div>
+<!-- Login Form -->
+<form class="space-y-6 block" id="form-login">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="login-email">University Email</label>
+<input class="w-full border border-outline-variant rounded-DEFAULT bg-surface px-4 py-3 font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-shadow placeholder-on-surface-variant/50" id="login-email" placeholder="student@graduate.utm.my" type="email">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="login-password">Password</label>
+<input class="w-full border border-outline-variant rounded-DEFAULT bg-surface px-4 py-3 font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-shadow" id="login-password" placeholder="••••••••" type="password">
+</div>
+<div class="flex items-center justify-between mt-2">
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded-DEFAULT border-outline-variant text-primary focus:ring-primary" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Remember me</span>
+</label>
+<a class="font-label-sm text-label-sm text-primary hover:underline" href="#">Forgot password?</a>
+</div>
+<button class="w-full bg-primary-container text-[#ffffff] font-label-md text-label-md py-3 rounded-DEFAULT hover:opacity-90 transition-opacity mt-6 flex items-center justify-center gap-2" type="button">
+                    Access Portal
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</form>
+<!-- Registration Form (Initially Hidden) -->
+<form class="space-y-5 hidden" id="form-register">
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="reg-fname">First Name</label>
+<input class="w-full border border-outline-variant rounded-DEFAULT bg-surface px-3 py-2.5 font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-shadow" id="reg-fname" type="text">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="reg-lname">Last Name</label>
+<input class="w-full border border-outline-variant rounded-DEFAULT bg-surface px-3 py-2.5 font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-shadow" id="reg-lname" type="text">
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="reg-id">Matriculation Number</label>
+<input class="w-full border border-outline-variant rounded-DEFAULT bg-surface px-3 py-2.5 font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-shadow" id="reg-id" placeholder="e.g. 12345678" type="text">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="reg-email">University Email</label>
+<input class="w-full border border-outline-variant rounded-DEFAULT bg-surface px-3 py-2.5 font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-shadow" id="reg-email" placeholder="student@graduate.utm.my" type="email">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="reg-password">Create Password</label>
+<input class="w-full border border-outline-variant rounded-DEFAULT bg-surface px-3 py-2.5 font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-shadow" id="reg-password" type="password">
+</div>
+<button class="w-full bg-primary-container text-[#ffffff] font-label-md text-label-md py-3 rounded-DEFAULT hover:opacity-90 transition-opacity mt-4" type="button">
+                    Register Account
+                </button>
+</form>
+<div class="mt-8 pt-6 border-t border-outline-variant text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                    By continuing, you agree to the <a class="text-primary hover:underline" href="#">Terms of Service</a> and <a class="text-primary hover:underline" href="#">Privacy Policy</a>.
+                </p>
+</div>
+</div>
+</div>
+<script>
+        function switchTab(tab) {
+            const loginForm = document.getElementById('form-login');
+            const registerForm = document.getElementById('form-register');
+            const loginTab = document.getElementById('tab-login');
+            const registerTab = document.getElementById('tab-register');
+
+            if (tab === 'login') {
+                loginForm.classList.remove('hidden');
+                loginForm.classList.add('block');
+                registerForm.classList.remove('block');
+                registerForm.classList.add('hidden');
+
+                loginTab.classList.add('text-primary', 'border-primary');
+                loginTab.classList.remove('text-on-surface-variant', 'border-transparent');
+                
+                registerTab.classList.remove('text-primary', 'border-primary');
+                registerTab.classList.add('text-on-surface-variant', 'border-transparent');
+            } else {
+                registerForm.classList.remove('hidden');
+                registerForm.classList.add('block');
+                loginForm.classList.remove('block');
+                loginForm.classList.add('hidden');
+
+                registerTab.classList.add('text-primary', 'border-primary');
+                registerTab.classList.remove('text-on-surface-variant', 'border-transparent');
+                
+                loginTab.classList.remove('text-primary', 'border-primary');
+                loginTab.classList.add('text-on-surface-variant', 'border-transparent');
+            }
+        }
+    </script>
+
+
+
+
+</body></html>

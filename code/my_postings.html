@@ -1,0 +1,373 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>My Postings - UTM Virtual Internship Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Newsreader:wght@500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#fff0ef",
+                        "primary-fixed": "#ffdad7",
+                        "surface-variant": "#f1dedd",
+                        "surface-dim": "#e8d6d4",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#fdb742",
+                        "primary": "#4d0408",
+                        "surface-container": "#fdeae8",
+                        "secondary": "#805600",
+                        "surface-container-high": "#f7e4e2",
+                        "on-secondary-container": "#6e4900",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#fff8f7",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "outline": "#897270",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#f1817b",
+                        "tertiary": "#00272f",
+                        "on-surface": "#231919",
+                        "on-surface-variant": "#554241",
+                        "surface-container-highest": "#f1dedd",
+                        "secondary-fixed-dim": "#ffba47",
+                        "on-primary-fixed-variant": "#7e2928",
+                        "on-tertiary-fixed": "#001f26",
+                        "primary-container": "#6b1b1b",
+                        "on-secondary-fixed": "#291800",
+                        "tertiary-fixed": "#b9ebfa",
+                        "on-tertiary-fixed-variant": "#184d59",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#003e4a",
+                        "secondary-fixed": "#ffddb0",
+                        "on-background": "#231919",
+                        "tertiary-fixed-dim": "#9dcedd",
+                        "on-tertiary-container": "#78a9b7",
+                        "primary-fixed-dim": "#ffb3ae",
+                        "on-primary-fixed": "#410004",
+                        "inverse-surface": "#392e2d",
+                        "error": "#ba1a1a",
+                        "surface": "#fff8f7",
+                        "background": "#fff8f7",
+                        "inverse-primary": "#ffb3ae",
+                        "inverse-on-surface": "#ffedeb",
+                        "surface-tint": "#9d403d",
+                        "outline-variant": "#dcc0be",
+                        "on-secondary-fixed-variant": "#614000"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "h3": ["Newsreader"],
+                        "h1": ["Newsreader"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "h2": ["Newsreader"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "600" }],
+                        "h3": ["24px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "h1": ["40px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "h2": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom scrollbar for better look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.surface'); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.outline-variant'); 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline'); 
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="bg-surface docked full-width top-0 sticky z-40 border-b border-outline-variant flex justify-between items-center w-full px-margin-desktop py-base md:ml-64 shadow-none">
+<div class="flex items-center gap-4">
+<span class="font-h3 text-h3 font-bold text-primary">UTM Virtual Internship Portal</span>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search Bar -->
+<div class="relative hidden lg:block w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-outline-variant rounded-DEFAULT bg-surface text-body-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary placeholder-on-surface-variant transition-colors" placeholder="Search..." type="text">
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button aria-label="notifications" class="p-2 hover:text-primary transition-colors opacity-90 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button aria-label="settings" class="p-2 hover:text-primary transition-colors opacity-90 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<!-- Profile Image -->
+<div class="h-10 w-10 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden flex-shrink-0 cursor-pointer hover:border-primary transition-colors opacity-90 active:scale-95 transition-transform">
+<img alt="Supervisor Profile" class="h-full w-full object-cover" data-alt="A professional headshot of a supervisor in a clean, modern corporate setting, soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBdfysowd5Pm1a6FLlqsvtjIHq8VOr2W4XMy2ezgO60lYp60Nnma8xydX30Q98h7EjogREpvMz0cVIK2rMpeTR9kPeKbPqHv0qzb7Hd-9d0vMqsJqRClucAWYijkZe9x1r03A33v6YZu4mnMIKhVOiypICI5_i3Pe3nBwARLSiBxuffumEns3AxOeZeCB-3Ctnd8rTYObpy20YGa-Mn3avrU9Sri1HrBFcVDpqL3_eEiG7v4qPm8N-DLY22mAEshzi525MCPk_-Q">
+</div>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="bg-surface h-screen w-64 fixed left-0 top-0 flex flex-col border-r border-outline-variant hidden md:flex z-50">
+<!-- Header -->
+<div class="p-6 border-b border-outline-variant flex flex-col items-center text-center">
+<img src="https://lh3.googleusercontent.com/aida-public/AB6AXuALJ0IC37RsH7JLKd8P899TSVUiIgwwZC4a-pLfFURvinhF7kAG8ZaJRUFn-Lx9Q17AoYEojN3xJAxEUQhFSc22dRmF3lwjWYhRrpgLMNymQir2fQaUKZTGv0WfX2-5EuUpQT1xXf7cZeMfwQyLCwyaW2y9r718Cd5OomWK8OcXChiWF4uo9T-PFt_RZ-oV7S5_8tWOVC3xy2vBi29FGRbuQA6CJiGtrwVDrqcEByhOPIzMr6I1iSv0MTgii6g9CMJ22XZuYuxK6A" alt="UTM Logo" class="h-16 w-auto object-contain mb-4">
+<h1 class="font-h3 text-h3 text-primary mb-1">VIP Portal</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Supervisor Panel</p>
+</div>
+<!-- Navigation Links -->
+<div class="flex flex-col h-full py-base flex-grow overflow-y-auto mt-4 px-3 gap-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container transition-colors duration-200 scale-98 active:opacity-80 transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="dashboard">dashboard</span>
+<span class="">Dashboard</span>
+</a>
+<!-- ACTIVE TAB -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-primary font-bold border-l-4 border-secondary-container bg-surface-container-high font-label-md text-label-md transition-all" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="work" data-weight="fill">work</span>
+<span class="">My Postings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container transition-colors duration-200 scale-98 active:opacity-80 transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="group">group</span>
+<span class="">Applicants</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container transition-colors duration-200 scale-98 active:opacity-80 transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="mail">mail</span>
+<span class="">Messages</span>
+</a>
+<div class="mt-6 px-4">
+<button class="w-full bg-primary-container text-on-primary py-2 px-4 rounded-DEFAULT font-label-md text-label-md hover:bg-primary transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                    Post New Internship
+                </button>
+</div>
+</div>
+<!-- Footer Links -->
+<div class="p-4 border-t border-outline-variant mt-auto">
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container transition-colors duration-200 scale-98 active:opacity-80 transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="logout">logout</span>
+<span class="">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-64 p-margin-desktop min-h-screen">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+<div>
+<h2 class="font-h1 text-h1 text-on-surface">My Internship Postings</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Manage your current and past internship listings.</p>
+</div>
+<button class="bg-primary-container text-on-primary py-3 px-6 rounded-DEFAULT font-label-md text-label-md hover:bg-primary transition-colors flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined">add</span>
+                Post New Internship
+            </button>
+</div>
+<!-- Filter & Search Bar -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 mb-8 flex flex-col md:flex-row gap-4 justify-between items-center shadow-sm">
+<div class="relative w-full md:w-1/3">
+<label class="sr-only" for="search-postings">Search by title</label>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-outline-variant rounded-DEFAULT bg-surface text-body-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary" id="search-postings" placeholder="Search by title..." type="text">
+</div>
+<div class="flex items-center gap-4 w-full md:w-auto">
+<span class="font-label-md text-label-md text-on-surface-variant whitespace-nowrap">Filter by Status:</span>
+<select class="w-full md:w-48 py-2 px-3 border border-outline-variant rounded-DEFAULT bg-surface text-body-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary appearance-none cursor-pointer">
+<option value="all">All Statuses</option>
+<option value="active">Active</option>
+<option value="draft">Draft</option>
+<option value="closed">Closed</option>
+</select>
+</div>
+</div>
+<!-- Listings Table / Bento Grid Style Approach for Desktop, Stacked Cards for Mobile -->
+<div class="grid grid-cols-1 gap-4">
+<!-- Header Row (Hidden on mobile) -->
+<div class="hidden md:grid grid-cols-12 gap-4 px-6 py-3 border-b border-outline-variant text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">
+<div class="col-span-5">Job Title</div>
+<div class="col-span-2">Date Posted</div>
+<div class="col-span-2 text-center">Applicants</div>
+<div class="col-span-1 text-center">Status</div>
+<div class="col-span-2 text-right">Actions</div>
+</div>
+<!-- Listing Card 1 (Active) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-0 flex flex-col md:flex-row relative overflow-hidden group hover:border-outline transition-colors">
+<!-- Warm Amber Left Border -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary-container"></div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4 w-full items-center p-6 pl-8">
+<div class="col-span-1 md:col-span-5 flex flex-col">
+<span class="font-h3 text-h3 text-on-surface">Data Analyst Intern</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Department of Information Systems</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex flex-col md:block">
+<span class="md:hidden font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Date Posted</span>
+<span class="font-body-md text-body-md">Oct 12, 2023</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex justify-between md:justify-center items-center">
+<span class="md:hidden font-label-sm text-label-sm text-on-surface-variant uppercase">Applicants</span>
+<a class="font-label-md text-label-md text-primary hover:underline bg-surface-container px-3 py-1 rounded-full" href="#">14 Applicants</a>
+</div>
+<div class="col-span-1 md:col-span-1 flex justify-between md:justify-center items-center">
+<span class="md:hidden font-label-sm text-label-sm text-on-surface-variant uppercase">Status</span>
+<span class="font-label-sm text-label-sm px-2 py-1 rounded bg-[#C4860A]/10 text-[#C4860A] uppercase">Active</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex justify-end gap-2 mt-4 md:mt-0">
+<button aria-label="Edit" class="p-2 text-on-surface-variant hover:text-primary transition-colors border border-transparent hover:border-outline-variant rounded-DEFAULT">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button aria-label="Close" class="p-2 text-on-surface-variant hover:text-primary transition-colors border border-transparent hover:border-outline-variant rounded-DEFAULT">
+<span class="material-symbols-outlined">block</span>
+</button>
+<button aria-label="Delete" class="p-2 text-error hover:bg-error-container transition-colors border border-transparent hover:border-error-container rounded-DEFAULT">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Listing Card 2 (Draft) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-0 flex flex-col md:flex-row relative overflow-hidden group hover:border-outline transition-colors">
+<!-- Neutral Left Border for Draft -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-outline-variant"></div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4 w-full items-center p-6 pl-8">
+<div class="col-span-1 md:col-span-5 flex flex-col">
+<span class="font-h3 text-h3 text-on-surface">Software Engineering Intern</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Innovation Lab</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex flex-col md:block">
+<span class="md:hidden font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Date Posted</span>
+<span class="font-body-md text-body-md text-on-surface-variant">-</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex justify-between md:justify-center items-center">
+<span class="md:hidden font-label-sm text-label-sm text-on-surface-variant uppercase">Applicants</span>
+<span class="font-body-md text-body-md text-on-surface-variant">0</span>
+</div>
+<div class="col-span-1 md:col-span-1 flex justify-between md:justify-center items-center">
+<span class="md:hidden font-label-sm text-label-sm text-on-surface-variant uppercase">Status</span>
+<span class="font-label-sm text-label-sm px-2 py-1 rounded bg-gray-500/10 text-gray-700 uppercase">Draft</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex justify-end gap-2 mt-4 md:mt-0">
+<button aria-label="Edit" class="p-2 text-on-surface-variant hover:text-primary transition-colors border border-transparent hover:border-outline-variant rounded-DEFAULT">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button aria-label="Delete" class="p-2 text-error hover:bg-error-container transition-colors border border-transparent hover:border-error-container rounded-DEFAULT">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Listing Card 3 (Active) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-0 flex flex-col md:flex-row relative overflow-hidden group hover:border-outline transition-colors">
+<!-- Warm Amber Left Border -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary-container"></div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4 w-full items-center p-6 pl-8">
+<div class="col-span-1 md:col-span-5 flex flex-col">
+<span class="font-h3 text-h3 text-on-surface">UX Research Assistant</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Human-Computer Interaction Dept</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex flex-col md:block">
+<span class="md:hidden font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Date Posted</span>
+<span class="font-body-md text-body-md">Sep 28, 2023</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex justify-between md:justify-center items-center">
+<span class="md:hidden font-label-sm text-label-sm text-on-surface-variant uppercase">Applicants</span>
+<a class="font-label-md text-label-md text-primary hover:underline bg-surface-container px-3 py-1 rounded-full" href="#">8 Applicants</a>
+</div>
+<div class="col-span-1 md:col-span-1 flex justify-between md:justify-center items-center">
+<span class="md:hidden font-label-sm text-label-sm text-on-surface-variant uppercase">Status</span>
+<span class="font-label-sm text-label-sm px-2 py-1 rounded bg-[#C4860A]/10 text-[#C4860A] uppercase">Active</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex justify-end gap-2 mt-4 md:mt-0">
+<button aria-label="Edit" class="p-2 text-on-surface-variant hover:text-primary transition-colors border border-transparent hover:border-outline-variant rounded-DEFAULT">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button aria-label="Close" class="p-2 text-on-surface-variant hover:text-primary transition-colors border border-transparent hover:border-outline-variant rounded-DEFAULT">
+<span class="material-symbols-outlined">block</span>
+</button>
+<button aria-label="Delete" class="p-2 text-error hover:bg-error-container transition-colors border border-transparent hover:border-error-container rounded-DEFAULT">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Listing Card 4 (Closed) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-0 flex flex-col md:flex-row relative overflow-hidden group hover:border-outline transition-colors opacity-75">
+<!-- Maroon Left Border for Closed -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-container"></div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4 w-full items-center p-6 pl-8">
+<div class="col-span-1 md:col-span-5 flex flex-col">
+<span class="font-h3 text-h3 text-on-surface line-through decoration-outline">Network Administration Intern</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Campus IT Services</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex flex-col md:block">
+<span class="md:hidden font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Date Posted</span>
+<span class="font-body-md text-body-md">Aug 15, 2023</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex justify-between md:justify-center items-center">
+<span class="md:hidden font-label-sm text-label-sm text-on-surface-variant uppercase">Applicants</span>
+<a class="font-label-md text-label-md text-on-surface-variant hover:underline bg-surface-variant px-3 py-1 rounded-full" href="#">32 Applicants</a>
+</div>
+<div class="col-span-1 md:col-span-1 flex justify-between md:justify-center items-center">
+<span class="md:hidden font-label-sm text-label-sm text-on-surface-variant uppercase">Status</span>
+<span class="font-label-sm text-label-sm px-2 py-1 rounded bg-[#6B1B1B]/10 text-[#6B1B1B] uppercase">Closed</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex justify-end gap-2 mt-4 md:mt-0">
+<button aria-label="View" class="p-2 text-on-surface-variant hover:text-primary transition-colors border border-transparent hover:border-outline-variant rounded-DEFAULT">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination (Simple) -->
+<div class="flex justify-between items-center mt-8 border-t border-outline-variant pt-4">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Showing 1 to 4 of 4 postings</span>
+<div class="flex gap-2">
+<button class="px-3 py-1 border border-outline-variant rounded-DEFAULT text-on-surface-variant disabled:opacity-50 font-label-md text-label-md" disabled="">Prev</button>
+<button class="px-3 py-1 border border-outline-variant rounded-DEFAULT text-on-surface-variant disabled:opacity-50 font-label-md text-label-md" disabled="">Next</button>
+</div>
+</div>
+</main>
+
+
+</body></html>

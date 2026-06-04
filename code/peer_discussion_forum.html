@@ -1,0 +1,364 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>UTM VIP - Peer Discussion Forum</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Newsreader:wght@500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#410004",
+                        "inverse-on-surface": "#ffedeb",
+                        "surface-bright": "#fff8f7",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#fdeae8",
+                        "secondary-fixed-dim": "#ffba47",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#7e2928",
+                        "on-background": "#231919",
+                        "on-tertiary-fixed-variant": "#184d59",
+                        "inverse-primary": "#ffb3ae",
+                        "surface-container-low": "#fff0ef",
+                        "surface": "#fff8f7",
+                        "tertiary-fixed": "#b9ebfa",
+                        "on-primary": "#ffffff",
+                        "outline": "#897270",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#392e2d",
+                        "surface-tint": "#9d403d",
+                        "on-primary-container": "#f1817b",
+                        "tertiary-container": "#003e4a",
+                        "secondary": "#805600",
+                        "primary": "#4d0408",
+                        "on-secondary-fixed-variant": "#614000",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#291800",
+                        "surface-variant": "#f1dedd",
+                        "surface-container-high": "#f7e4e2",
+                        "on-tertiary-container": "#78a9b7",
+                        "on-tertiary-fixed": "#001f26",
+                        "secondary-container": "#fdb742",
+                        "on-surface-variant": "#554241",
+                        "surface-container-highest": "#f1dedd",
+                        "primary-fixed": "#ffdad7",
+                        "tertiary": "#00272f",
+                        "primary-fixed-dim": "#ffb3ae",
+                        "background": "#fff8f7",
+                        "surface-dim": "#e8d6d4",
+                        "outline-variant": "#dcc0be",
+                        "on-surface": "#231919",
+                        "on-secondary-container": "#6e4900",
+                        "secondary-fixed": "#ffddb0",
+                        "tertiary-fixed-dim": "#9dcedd",
+                        "primary-container": "#6b1b1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "base": "8px",
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h1": ["Newsreader"],
+                        "body-sm": ["Inter"],
+                        "h3": ["Newsreader"],
+                        "h2": ["Newsreader"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h1": ["40px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "h2": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex bg-surface text-primary border-r border-outline-variant docked left-0 h-screen w-64 fixed left-0 top-0 flex-col py-base z-50">
+<div class="px-4 mb-8 mt-4 flex items-center gap-3"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5nDwFaoQYdc2G7MI44gvfgB5p34nH9Z4lDuw5ut_kUw67DTh21WwgDYPhAqkeRI-9u29ViFepNga_C-e7SWaRwblPQsuwx_EVac2vEtr5TZwv9jS41dKlfS94BjOilTlXxcM7dnnBuokUwcpx4TFSgj2pnKnHw2ztlWXYBZ2GSYGZjtY-GYghFiO7E3y1oYYW5uqwxBDX7ynP5tVCYAfdW0DshfMPh8OH1gJAs9LK2_ET0Udl2soyG7sRIhzXKa1SgBkW1ZugmA" alt="UTM Logo" class="h-12 w-auto"><div class="flex flex-col"><h2 class="font-h3 text-h3 font-bold text-primary leading-tight">UTM VIP</h2><p class="font-body-sm text-body-sm text-on-surface-variant">Internship Portal</p></div></div>
+<div class="px-4 mb-6">
+<button class="w-full bg-primary-container text-on-primary font-label-md text-label-md py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">
+                Post Internship
+            </button>
+</div>
+<ul class="flex flex-col gap-2 flex-grow">
+<li class="">
+<a class="flex items-center gap-3 text-on-surface-variant py-3 px-4 hover:text-primary hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 text-on-surface-variant py-3 px-4 hover:text-primary hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-md text-label-md">Career Radar</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container border-l-4 border-secondary rounded-r-full py-3 px-4 scale-98 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="forum" style="font-variation-settings: 'FILL' 1;">forum</span>
+<span class="font-label-md text-label-md">Peer Forum</span>
+</a>
+</li>
+</ul>
+<ul class="flex flex-col gap-2 mt-auto pb-4">
+<li class="">
+<a class="flex items-center gap-3 text-on-surface-variant py-3 px-4 hover:text-primary hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 text-on-surface-variant py-3 px-4 hover:text-primary hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface text-primary border-b border-outline-variant docked full-width top-0 flex justify-between items-center w-full px-margin-desktop h-16 z-40 sticky">
+<div class="flex items-center gap-4">
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-2">
+<a class="hover:text-primary" href="#">Home</a>
+<span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-background font-medium">Peer Forum</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 border border-outline-variant rounded-full bg-surface-container-lowest text-on-background font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary w-64" placeholder="Search discussions..." type="text">
+</div>
+<button aria-label="Notifications" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button aria-label="Help" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<button aria-label="Account" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-margin-mobile md:p-margin-desktop flex-grow flex flex-col max-w-container-max mx-auto w-full">
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
+<div>
+<h1 class="font-h2 text-h2 text-on-background mb-2">Peer Discussion Forum</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Connect, share experiences, and seek advice from fellow UTM students and alumni.</p>
+</div>
+<button class="bg-primary-container text-on-primary font-label-md text-label-md py-3 px-6 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2 whitespace-nowrap self-start sm:self-auto">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    Start New Thread
+                </button>
+</div>
+<!-- Two Column Layout -->
+<div class="flex flex-col lg:flex-row gap-gutter items-start">
+<!-- Left Column (Thread Feed) -->
+<div class="w-full lg:w-2/3 flex flex-col gap-4">
+<!-- Filters/Sort -->
+<div class="flex items-center justify-between bg-surface-container-lowest p-4 border border-outline-variant rounded-lg mb-2">
+<div class="flex gap-4 font-label-md text-label-md">
+<button class="text-primary border-b-2 border-primary pb-1">Recent</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors pb-1">Top Voted</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors pb-1">Unanswered</button>
+</div>
+<button class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="filter_list">filter_list</span>
+                            Filter
+                        </button>
+</div>
+<!-- Thread Card 1 -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6 border-l-4 border-l-secondary-container hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0">
+<div class="w-10 h-10 rounded-full bg-surface-variant border border-outline-variant flex items-center justify-center text-primary font-bold">ZS</div>
+</div>
+<div class="flex-grow">
+<h3 class="font-h3 text-h3 text-on-background mb-1">Petronas Software Engineering Interview Experience - 2026</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3 line-clamp-2">Just finished my final technical round with Petronas yesterday. Sharing the structure and some of the technical questions they asked, especially regarding system design and specific tech stacks...</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded">#interview-prep</span>
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded">#petronas</span>
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded">#software-engineering</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="forum">forum</span> 24 replies</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="visibility">visibility</span> 1.2k views</span>
+</div>
+<span class="text-xs">Posted 2 hours ago by Zay Yar Shin</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Thread Card 2 -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6 border-l-4 border-l-secondary-container hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0">
+<div class="w-10 h-10 rounded-full bg-surface-variant border border-outline-variant flex items-center justify-center text-primary font-bold">NH</div>
+</div>
+<div class="flex-grow">
+<h3 class="font-h3 text-h3 text-on-background mb-1">Tips for CV formatting to pass ATS systems?</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3 line-clamp-2">I've been applying to a few MNCs but feel like my CV isn't making it past the initial screening. Are there specific keywords or formatting styles (like standard fonts vs designed templates) that work better for Malaysian tech companies?</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded">#resume-tips</span>
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded">#ATS</span>
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded">#career-advice</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="forum">forum</span> 15 replies</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="visibility">visibility</span> 850 views</span>
+</div>
+<span class="text-xs">Posted 5 hours ago by Nahid Hasan Rayan</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Thread Card 3 -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6 border-l-4 border-l-secondary-container hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0">
+<div class="w-10 h-10 rounded-full bg-surface-variant border border-outline-variant flex items-center justify-center text-primary font-bold">M</div>
+</div>
+<div class="flex-grow">
+<h3 class="font-h3 text-h3 text-on-background mb-1">Need advice: Choosing between Startup vs GLC for internship</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3 line-clamp-2">I have offers from a small fast-paced startup in KL and a large Government Linked Company. The startup pays slightly less but promises more hands-on work. The GLC is prestigious but might be slower. Thoughts?</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded">#career-choice</span>
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded">#internship-hunting</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="forum">forum</span> 42 replies</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="visibility">visibility</span> 2.1k views</span>
+</div>
+<span class="text-xs">Posted 1 day ago by Khalid Waleed Issa</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Pagination -->
+<div class="flex justify-center items-center gap-2 mt-4">
+<button class="p-2 border border-outline-variant rounded text-on-surface-variant hover:bg-surface-container-low disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="px-3 py-1 bg-primary text-on-primary rounded font-label-sm text-label-sm">1</button>
+<button class="px-3 py-1 border border-outline-variant text-on-surface-variant hover:bg-surface-container-low rounded font-label-sm text-label-sm">2</button>
+<button class="px-3 py-1 border border-outline-variant text-on-surface-variant hover:bg-surface-container-low rounded font-label-sm text-label-sm">3</button>
+<span class="text-on-surface-variant">...</span>
+<button class="p-2 border border-outline-variant rounded text-on-surface-variant hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[18px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Right Column (Sidebar Widgets) -->
+<div class="w-full lg:w-1/3 flex flex-col gap-6">
+<!-- Popular Topics Widget -->
+<aside class="bg-surface-container-lowest border border-outline-variant rounded-lg p-5">
+<h4 class="font-h3 text-[20px] text-on-background mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="trending_up">trending_up</span>
+                            Popular Topics
+                        </h4>
+<div class="flex flex-wrap gap-2">
+<a class="px-3 py-1.5 bg-surface-variant text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors font-label-sm text-label-sm rounded-full border border-outline-variant" href="#">#interview-prep (142)</a>
+<a class="px-3 py-1.5 bg-surface-variant text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors font-label-sm text-label-sm rounded-full border border-outline-variant" href="#">#resume-tips (98)</a>
+<a class="px-3 py-1.5 bg-surface-variant text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors font-label-sm text-label-sm rounded-full border border-outline-variant" href="#">#petronas (75)</a>
+<a class="px-3 py-1.5 bg-surface-variant text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors font-label-sm text-label-sm rounded-full border border-outline-variant" href="#">#software-engineering (62)</a>
+<a class="px-3 py-1.5 bg-surface-variant text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors font-label-sm text-label-sm rounded-full border border-outline-variant" href="#">#career-fair (45)</a>
+<a class="px-3 py-1.5 bg-surface-variant text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors font-label-sm text-label-sm rounded-full border border-outline-variant" href="#">#internship-logbook (30)</a>
+</div>
+</aside>
+<!-- Top Contributors Widget -->
+<aside class="bg-surface-container-lowest border border-outline-variant rounded-lg p-5">
+<h4 class="font-h3 text-[20px] text-on-background mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="group">group</span>
+                            Top Contributors
+                        </h4>
+<ul class="flex flex-col gap-3">
+<li class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant flex items-center justify-center text-primary font-bold text-xs">GA</div>
+<div>
+<p class="font-label-md text-label-md text-on-background">Ghazi Anwar</p>
+<p class="text-[11px] text-on-surface-variant">Alumni Mentor</p>
+</div>
+</div>
+<span class="bg-surface-variant text-on-surface-variant text-[10px] px-2 py-0.5 rounded-full">342 pts</span>
+</li>
+<li class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant flex items-center justify-center text-primary font-bold text-xs">JA</div>
+<div>
+<p class="font-label-md text-label-md text-on-background">Jobayer Alam</p>
+<p class="text-[11px] text-on-surface-variant">Senior Student</p>
+</div>
+</div>
+<span class="bg-surface-variant text-on-surface-variant text-[10px] px-2 py-0.5 rounded-full">215 pts</span>
+</li>
+<li class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant flex items-center justify-center text-primary font-bold text-xs">Z</div>
+<div>
+<p class="font-label-md text-label-md text-on-background">Zay Yar Shin</p>
+<p class="text-[11px] text-on-surface-variant">Recent Grad</p>
+</div>
+</div>
+<span class="bg-surface-variant text-on-surface-variant text-[10px] px-2 py-0.5 rounded-full">189 pts</span>
+</li>
+</ul>
+</aside>
+<!-- Guidelines Box -->
+<aside class="bg-surface-container p-5 rounded-lg border border-outline-variant">
+<h4 class="font-h3 text-[18px] text-primary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="policy">policy</span>
+                            Forum Guidelines
+                        </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3">
+                            Please maintain professional conduct in all discussions. This forum is monitored by UTM career advisors.
+                        </p>
+<ul class="font-body-sm text-body-sm text-on-surface-variant space-y-1 list-disc list-inside">
+<li class="">Respect academic integrity.</li>
+<li class="">Do not share confidential interview materials.</li>
+<li class="">Be constructive and supportive.</li>
+</ul>
+<a class="inline-block mt-3 font-label-sm text-label-sm text-primary hover:underline" href="#">Read full policy →</a>
+</aside>
+</div>
+</div>
+</div>
+</main>
+
+
+</body></html>

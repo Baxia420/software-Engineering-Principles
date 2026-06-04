@@ -1,0 +1,291 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>VIP Portal - Internship Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#4d0408",
+                        "surface-container-low": "#fff0ef",
+                        "tertiary-fixed": "#b9ebfa",
+                        "surface-dim": "#e8d6d4",
+                        "surface-container-high": "#f7e4e2",
+                        "on-secondary-container": "#6e4900",
+                        "primary-fixed-dim": "#ffb3ae",
+                        "on-primary-container": "#f1817b",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#ffedeb",
+                        "secondary-fixed": "#ffddb0",
+                        "primary-container": "#6b1b1b",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#392e2d",
+                        "secondary": "#805600",
+                        "on-tertiary-fixed": "#001f26",
+                        "surface": "#fff8f7",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#291800",
+                        "tertiary": "#00272f",
+                        "on-surface-variant": "#554241",
+                        "on-tertiary-container": "#78a9b7",
+                        "surface-bright": "#fff8f7",
+                        "on-surface": "#231919",
+                        "on-tertiary-fixed-variant": "#184d59",
+                        "surface-container": "#fdeae8",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#7e2928",
+                        "outline-variant": "#dcc0be",
+                        "primary-fixed": "#ffdad7",
+                        "secondary-fixed-dim": "#ffba47",
+                        "on-background": "#231919",
+                        "tertiary-fixed-dim": "#9dcedd",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#614000",
+                        "surface-variant": "#f1dedd",
+                        "inverse-primary": "#ffb3ae",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#f1dedd",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#897270",
+                        "surface-tint": "#9d403d",
+                        "tertiary-container": "#003e4a",
+                        "on-primary-fixed": "#410004",
+                        "background": "#fff8f7",
+                        "secondary-container": "#fdb742"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "h2": ["Newsreader"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "h3": ["Newsreader"],
+                        "h1": ["Newsreader"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "600" }],
+                        "h2": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "h1": ["40px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface font-body-md text-body-md text-on-surface antialiased flex">
+<!-- SideNavBar Shared Component -->
+<nav class="flex flex-col h-screen fixed left-0 top-0 z-40 w-64 overflow-y-auto bg-[#FFFFFF] border-r border-[#E5E1DA] transition-all duration-150 ease-in-out">
+<div class="p-6 flex flex-col items-center border-b border-outline-variant/30 pb-8 mb-4">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-4 overflow-hidden border border-outline-variant">
+<img alt="University Crest" class="w-full h-full object-cover" data-alt="heraldic university crest with a shield, maroon and gold colors, traditional academic style on white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4nNtKKefUXmOnlRbBKYSz5pMKvbIzV7tnCOG_T4pXBPj6q5T7xw9R9i1Om028PsSEq7_DydWYfehwb8iC4ceRv9XmKuHTTh4eD8VvA6JI03FgPF6Jhj37_AL1is3NY-41AkFMCcGIdYUs7VQRpfqH7_CqRR2LvP6nalIfJGE6uKKhpb89sUEDmzTIgt5aUQE2rSPhjtQeJzKzF_WtfOkKIXpZCtCAV-Aljw19R7Jrfz-MZourC7K9jOkm-baeR1IPvj9YnBvOCuFi">
+</div>
+<h1 class="text-xl font-black text-[#6B1B1B] uppercase font-['Newsreader'] serif antialiased tracking-wide">VIP Portal</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1 text-center">Academic Careers</p>
+</div>
+<div class="flex-1 px-0 space-y-1">
+<a class="flex items-center text-slate-500 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 hover:text-[#6B1B1B] transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-4 text-[20px]">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- Active State: Browse Listings -->
+<a class="flex items-center text-[#6B1B1B] font-bold border-l-4 border-[#C4860A] bg-slate-50 py-3 px-4 transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-4 text-[20px]" style="font-variation-settings: &quot;FILL&quot; 1;">search</span>
+<span class="font-label-md text-label-md">Browse Listings</span>
+</a>
+<a class="flex items-center text-slate-500 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 hover:text-[#6B1B1B] transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-4 text-[20px]">assignment</span>
+<span class="font-label-md text-label-md">My Applications</span>
+</a>
+<a class="flex items-center text-slate-500 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 hover:text-[#6B1B1B] transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-4 text-[20px]">mail</span>
+<span class="font-label-md text-label-md">Messages</span>
+</a>
+
+
+<a class="flex items-center text-slate-500 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 hover:text-[#6B1B1B] transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-4 text-[20px]">calendar_today</span>
+<span class="font-label-md text-label-md">Interviews</span>
+</a>
+<a class="flex items-center text-slate-500 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 hover:text-[#6B1B1B] transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-4 text-[20px]">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</div>
+<div class="p-4 mt-auto border-t border-[#E5E1DA]">
+<a class="flex items-center text-slate-500 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 hover:text-[#6B1B1B] transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-4 text-[20px]">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-1 ml-64 min-h-screen">
+<!-- Top bar for breadcrumbs to maintain spatial separation -->
+<div class="w-full border-b border-outline-variant bg-surface-container-lowest px-margin-desktop py-4 sticky top-0 z-30">
+<div class="max-w-container-max mx-auto flex items-center space-x-2 font-label-sm text-label-sm text-on-surface-variant">
+<a class="hover:text-primary-container" href="#">Home</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary-container" href="#">Browse Listings</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface">Data Science Intern</span>
+</div>
+</div>
+<div class="px-margin-desktop py-12 max-w-[1080px] mx-auto">
+<!-- Header Section -->
+<header class="flex items-start gap-8 mb-12 pb-8 border-b border-outline-variant">
+<div class="w-24 h-24 rounded border border-outline-variant bg-surface-container-lowest flex items-center justify-center shrink-0 p-2 overflow-hidden shadow-sm">
+<img alt="Company Logo Placeholder" class="w-full h-full object-contain" data-alt="minimalist modern corporate logo icon in deep blue gradient on a clean white background, square crop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsVw8iVk95CMpYNV6_XpUWOrV6720y4j24phlz64JcCC9Bem4fl9ksutgy8VxwL-ebnbuW2QgDihNOfyYkcwFd6E4yhzDfAb_xj-8J6Fyf7V0smb0_wwh5Xz6AQ2v5Vk0Hpmg8v5L2Qol1bVRIiTqtbpeo-NF5kiyWsrAHvGrbPdo7ABlZ2sQrbZx_VyWBbsRVJrv06snDZ12GevnaaTUn6wICWrTPt8dpZWs6QuAiw-o50H3IH6D4XjJomOW7EcLGyxogznpccg">
+</div>
+<div class="flex-1 pt-1">
+<div class="inline-flex items-center px-2 py-1 mb-3 rounded bg-gray-600/10 text-gray-600 font-label-sm text-label-sm uppercase tracking-wider">
+                        Active Listing
+                    </div>
+<h1 class="font-h1 text-h1 text-primary-container mb-2 leading-tight">Data Science Intern</h1>
+<div class="font-h3 text-h3 text-secondary mb-4">Nexus Technologies Analytics Group</div>
+<div class="flex flex-wrap gap-4 font-body-sm text-body-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                            Kuala Lumpur (Hybrid)
+                        </div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">business</span>
+                            Technology / Software
+                        </div>
+</div>
+</div>
+</header>
+<!-- Two Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column (Content Canvas) -->
+<div class="lg:col-span-8 space-y-10">
+<section>
+<h2 class="font-h3 text-h3 text-primary-container mb-4 pb-2 border-b border-surface-variant">Role Description</h2>
+<div class="font-body-md text-body-md text-on-surface space-y-4">
+<p class="">Nexus Technologies is seeking a highly motivated and analytical Data Science Intern to join our core product team. In this role, you will work closely with senior data scientists and engineers to analyze vast datasets, develop predictive models, and contribute to the optimization of our enterprise software solutions.</p>
+<p class="">This internship is designed to provide hands-on experience in a fast-paced corporate environment. You will not only apply theoretical knowledge to practical, large-scale problems but also learn the rigorous methodologies required for deploying machine learning models in a production environment.</p>
+</div>
+</section>
+<section>
+<h2 class="font-h3 text-h3 text-primary-container mb-4 pb-2 border-b border-surface-variant">Key Responsibilities</h2>
+<ul class="font-body-md text-body-md text-on-surface space-y-3 list-none pl-0">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">check_circle</span>
+<span class="">Assist in the extraction, cleaning, and preprocessing of large datasets from varied sources.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">check_circle</span>
+<span class="">Collaborate on building, training, and validating supervised and unsupervised machine learning models.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">check_circle</span>
+<span class="">Design and implement interactive dashboards using Python or specialized BI tools to visualize complex data trends for stakeholders.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">check_circle</span>
+<span class="">Participate in weekly analytical review sessions and present findings to the technical leadership team.</span>
+</li>
+</ul>
+</section>
+<section>
+<h2 class="font-h3 text-h3 text-primary-container mb-4 pb-2 border-b border-surface-variant">Requirements</h2>
+<ul class="font-body-md text-body-md text-on-surface space-y-3 list-none pl-0">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">bookmark</span>
+<span class="">Currently pursuing a Bachelor's or Master's degree in Computer Science, Statistics, Mathematics, or a related field.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">bookmark</span>
+<span class="">Strong foundation in statistical analysis and programming, specifically with Python (Pandas, NumPy, Scikit-learn).</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">bookmark</span>
+<span class="">Familiarity with SQL for database querying and manipulation.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">bookmark</span>
+<span class="">Excellent written and verbal communication skills, with the ability to explain complex technical concepts to non-technical audiences.</span>
+</li>
+</ul>
+</section>
+</div>
+<!-- Right Column (Sticky Summary) -->
+<div class="lg:col-span-4">
+<aside class="sticky top-24 bg-surface-container-lowest border border-outline-variant rounded p-6">
+<!-- Amber vertical accent typical of the cards in this system -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-[#C4860A] rounded-l"></div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-6 pb-4 border-b border-surface-variant">Internship Details</h3>
+<div class="space-y-5 mb-8">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1">Duration</div>
+<div class="font-body-md text-body-md text-on-surface font-medium">12 - 24 Weeks</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1">Monthly Stipend</div>
+<div class="font-body-md text-body-md text-on-surface font-medium">RM 1,200 - RM 1,500</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1">Application Deadline</div>
+<div class="font-body-md text-body-md text-error font-medium">October 15, 2026</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-1">Positions Available</div>
+<div class="font-body-md text-body-md text-on-surface font-medium">2 Openings</div>
+</div>
+</div>
+<button class="w-full bg-[#6B1B1B] hover:bg-[#4d0408] text-[#ffffff] font-label-md text-label-md py-3.5 px-4 rounded transition-colors flex items-center justify-center gap-2 border border-transparent">
+<span class="">Apply Now</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<div class="mt-4 text-center">
+<a class="inline-block font-label-sm text-label-sm text-primary-container hover:underline text-center" href="#">Save for later</a>
+</div>
+</aside>
+</div>
+</div>
+</div>
+</main>
+
+
+</body></html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Forum Thread - VIP Portal</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#ffba47",
+                        "primary-fixed": "#ffdad7",
+                        "on-tertiary-fixed-variant": "#184d59",
+                        "inverse-primary": "#ffb3ae",
+                        "tertiary-container": "#003e4a",
+                        "surface-container-high": "#f7e4e2",
+                        "secondary-fixed": "#ffddb0",
+                        "inverse-on-surface": "#ffedeb",
+                        "on-primary-fixed": "#410004",
+                        "primary-container": "#6b1b1b",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#291800",
+                        "on-surface": "#231919",
+                        "tertiary-fixed-dim": "#9dcedd",
+                        "inverse-surface": "#392e2d",
+                        "primary": "#4d0408",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#dcc0be",
+                        "surface-container-low": "#fff0ef",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#78a9b7",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#f1dedd",
+                        "surface-container": "#fdeae8",
+                        "on-background": "#231919",
+                        "surface-tint": "#9d403d",
+                        "outline": "#897270",
+                        "on-primary-container": "#f1817b",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#fff8f7",
+                        "surface-dim": "#e8d6d4",
+                        "secondary-container": "#fdb742",
+                        "on-tertiary-fixed": "#001f26",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#b9ebfa",
+                        "tertiary": "#00272f",
+                        "on-surface-variant": "#554241",
+                        "on-secondary-fixed-variant": "#614000",
+                        "surface-bright": "#fff8f7",
+                        "background": "#fff8f7",
+                        "on-secondary-container": "#6e4900",
+                        "surface-variant": "#f1dedd",
+                        "primary-fixed-dim": "#ffb3ae",
+                        "on-primary-fixed-variant": "#7e2928",
+                        "secondary": "#805600"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Newsreader"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "h3": ["Newsreader"],
+                        "h1": ["Newsreader"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "h1": ["40px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar (Hidden on Mobile) -->
+<nav class="hidden md:flex flex-col h-screen fixed left-0 top-0 z-40 w-64 overflow-y-auto bg-[#FFFFFF] border-r border-[#E5E1DA]">
+<!-- Header -->
+<div class="p-6 border-b border-[#E5E1DA] flex flex-col items-center">
+<img alt="University Crest" class="w-16 h-16 mb-4 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK8mXNcKE16c5bFQchYa9UzW9EhedEdkovFXaYYb3Vd048ZApKxeHDh4nZPVKqVYex98ULwHUXdSdjW0k3p9Ko9R-p-Fohhm-cFdt6Hb_zcp7-5kgQ265YFZSK1DiCl2yMZad3KoKeWGXLF7UqX5qtb-hM6qZ6nre7uaZFg-_Esccc3UvXnjtmwsMK_B9IInZCHsVOFNZVMlMalO9erMS45RWzYSDRd-l936hENbm0quOdJ5I980QgFByxBEkxt-qH3_AMyjkPNA">
+<h2 class="text-xl font-black text-[#6B1B1B] uppercase font-['Newsreader'] serif antialiased text-center">VIP Portal</h2>
+<p class="text-xs text-slate-500 font-label-sm uppercase tracking-wider mt-1 text-center">University Internships</p>
+</div>
+<!-- Main Navigation -->
+<div class="flex-1 py-4">
+<ul class="space-y-1">
+<li class="">
+<a class="flex items-center gap-3 text-slate-500 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 hover:text-[#6B1B1B] transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 text-slate-500 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 hover:text-[#6B1B1B] transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-md">Browse Listings</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 text-slate-500 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 hover:text-[#6B1B1B] transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-label-md">My Applications</span>
+</a>
+</li>
+<li class="">
+<!-- Contextually mapping "Messages/Forum" to Messages -->
+<a class="flex items-center gap-3 text-[#6B1B1B] font-bold border-l-4 border-[#C4860A] bg-slate-50 py-3 px-4 transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined icon-fill" data-icon="mail">mail</span>
+<span class="font-label-md">Messages</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 text-slate-500 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 hover:text-[#6B1B1B] transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+<span class="font-label-md">My Postings</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 text-slate-500 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 hover:text-[#6B1B1B] transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-md">Applicants</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 text-slate-500 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 hover:text-[#6B1B1B] transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-md">Interviews</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 text-slate-500 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 hover:text-[#6B1B1B] transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md">Profile</span>
+</a>
+</li>
+</ul>
+</div>
+<!-- Footer -->
+<div class="border-t border-[#E5E1DA] p-4">
+<a class="flex items-center gap-3 text-slate-500 py-2 px-4 hover:bg-slate-50 hover:text-[#6B1B1B] rounded-DEFAULT transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-64 w-full bg-surface-bright min-h-screen">
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden flex justify-between items-center w-full px-4 py-3 bg-white border-b border-[#E5E1DA] sticky top-0 z-30">
+<div class="flex items-center gap-3">
+<img alt="University Crest" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK8mXNcKE16c5bFQchYa9UzW9EhedEdkovFXaYYb3Vd048ZApKxeHDh4nZPVKqVYex98ULwHUXdSdjW0k3p9Ko9R-p-Fohhm-cFdt6Hb_zcp7-5kgQ265YFZSK1DiCl2yMZad3KoKeWGXLF7UqX5qtb-hM6qZ6nre7uaZFg-_Esccc3UvXnjtmwsMK_B9IInZCHsVOFNZVMlMalO9erMS45RWzYSDRd-l936hENbm0quOdJ5I980QgFByxBEkxt-qH3_AMyjkPNA">
+<span class="text-xl font-bold text-[#6B1B1B] font-['Newsreader'] serif tracking-tight">VIP Portal</span>
+</div>
+<div class="flex items-center gap-4 text-slate-600">
+<button class="hover:text-[#6B1B1B] active:opacity-80 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:text-[#6B1B1B] active:opacity-80 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Breadcrumbs & Back -->
+<div class="mb-6 flex items-center justify-between">
+<a class="flex items-center gap-2 text-on-surface-variant hover:text-primary-container font-label-sm transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_back">arrow_back</span>
+                    Back to Discussions
+                </a>
+</div>
+<!-- Thread Header Container -->
+<div class="bg-surface-lowest border border-[#E5E1DA] rounded-DEFAULT p-6 md:p-8 mb-6 border-l-4 border-l-[#C4860A]">
+<!-- Tags -->
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="inline-flex items-center px-2 py-1 bg-surface-variant text-on-surface-variant font-label-sm rounded-DEFAULT">#resume-tips</span>
+<span class="inline-flex items-center px-2 py-1 bg-surface-variant text-on-surface-variant font-label-sm rounded-DEFAULT">#ATS</span>
+<span class="inline-flex items-center px-2 py-1 bg-surface-variant text-on-surface-variant font-label-sm rounded-DEFAULT">#career-advice</span>
+</div>
+<h1 class="font-h1 text-h1 text-on-background mb-6">Tips for CV formatting to pass ATS systems?</h1>
+<!-- Original Poster Info -->
+<div class="flex items-start gap-4 mb-8 pb-8 border-b border-[#E5E1DA]">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary-container font-h3 flex-shrink-0">
+                        NR
+                    </div>
+<div class="flex-1">
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+<div>
+<h3 class="font-label-md text-label-md text-on-background">Nahid Hasan Rayan</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Computer Science, Year 3</p>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1 md:mt-0">Posted 2 days ago</span>
+</div>
+<!-- Post Content -->
+<div class="prose prose-sm md:prose-base max-w-none font-body-md text-body-md text-on-surface mt-4">
+<p class="mb-4">Hey everyone, I've been applying for summer internships and keep hearing about ATS (Applicant Tracking Systems) automatically rejecting resumes before human eyes even see them. I wanted to share some pitfalls I've learned about recently:</p>
+<ul class="list-disc pl-5 space-y-2 mb-4">
+<li class=""><strong>Complex Tables:</strong> Bots can't read across columns reliably. Stick to single-column layouts if possible.</li>
+<li class=""><strong>Images/Graphics:</strong> Headshots or skill-level charts (like those 5-star ratings for Java) are invisible to ATS.</li>
+<li class=""><strong>Non-standard Fonts:</strong> Stick to Arial, Calibri, Times New Roman, or Inter. Custom fonts often parse as gibberish.</li>
+</ul>
+<p class="">Has anyone here had success after simplifying their CV? Or does anyone know if specific tech companies in KL use stricter ATS rules?</p>
+</div>
+<!-- Post Actions -->
+<div class="flex items-center gap-6 mt-6 pt-4 border-t border-surface-variant">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary-container font-label-sm transition-colors group">
+<span class="material-symbols-outlined text-[20px] group-hover:icon-fill" data-icon="thumb_up">thumb_up</span>
+<span class="">24 Likes</span>
+</button>
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary-container font-label-sm transition-colors group">
+<span class="material-symbols-outlined text-[20px]" data-icon="reply">reply</span>
+<span class="">Reply</span>
+</button>
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary-container font-label-sm transition-colors group ml-auto">
+<span class="material-symbols-outlined text-[20px]" data-icon="bookmark">bookmark</span>
+<span class="">Save</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Replies Section Header -->
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-h3 text-h3 text-on-background">15 Replies</h2>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant">Sort by:</span>
+<select class="bg-surface border border-outline-variant text-on-surface font-label-sm rounded-DEFAULT px-2 py-1 focus:ring-1 focus:ring-primary-container focus:border-primary-container">
+<option>Oldest</option>
+<option>Newest</option>
+<option>Most Liked</option>
+</select>
+</div>
+</div>
+<!-- Replies List -->
+<div class="space-y-6">
+<!-- Reply 1 -->
+<div class="flex items-start gap-4 p-4 bg-surface rounded-DEFAULT border border-[#E5E1DA]">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed font-label-md flex-shrink-0">ZY</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md text-on-background">Zay Yar Shin</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Yesterday at 10:23 AM</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mb-3">Great tips! I used to have a fancy two-column resume I made in Canva. Switched to a plain black-and-white Word doc template, exported to PDF, and immediately started getting more callbacks from banks here.</p>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="flex items-center gap-1 hover:text-primary-container font-label-sm transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="thumb_up">thumb_up</span>
+<span class="">8</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Reply 2 -->
+<div class="flex items-start gap-4 p-4 bg-surface rounded-DEFAULT border border-[#E5E1DA]">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed font-label-md flex-shrink-0">KW</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md text-on-background">Khalid Waleed Issa</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Yesterday at 2:45 PM</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mb-3">Does anyone know if saving as PDF vs DOCX makes a difference? I heard some older ATS systems actually prefer DOCX because PDFs can parse weirdly if they are generated from design software.</p>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="flex items-center gap-1 hover:text-primary-container font-label-sm transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="thumb_up">thumb_up</span>
+<span class="">3</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Nested Reply (to Sarah) -->
+<div class="flex items-start gap-4 p-4 ml-12 bg-surface-variant/30 rounded-DEFAULT border border-[#E5E1DA] border-l-2 border-l-outline">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary-container font-label-sm flex-shrink-0">
+                            NR
+                        </div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md text-on-background">Nahid Hasan Rayan</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Today at 9:00 AM</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mb-3">@Khalid From what I read, if you use standard fonts and basic formatting, PDF is usually safer now because it preserves formatting. Just make sure it has selectable text (not an image PDF).</p>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="flex items-center gap-1 hover:text-primary-container font-label-sm transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="thumb_up">thumb_up</span>
+<span class="">5</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Add Reply Input -->
+<div class="mt-8 border-t border-[#E5E1DA] pt-6">
+<label class="block font-label-md text-on-background mb-2" for="reply-input">Write a reply</label>
+<textarea class="w-full bg-surface border border-outline-variant text-on-surface font-body-sm rounded-DEFAULT p-3 focus:ring-1 focus:ring-primary-container focus:border-primary-container" id="reply-input" placeholder="Add your thoughts or advice..." rows="4"></textarea>
+<div class="flex justify-end mt-4">
+<button class="bg-primary-container text-on-primary font-label-md py-2 px-6 rounded-DEFAULT hover:bg-primary transition-colors duration-200">
+                            Post Reply
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+
+</body></html>

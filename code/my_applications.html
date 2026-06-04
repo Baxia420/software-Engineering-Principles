@@ -1,0 +1,265 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>My Applications - VIP Portal</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#fdeae8",
+                    "surface-variant": "#f1dedd",
+                    "on-background": "#231919",
+                    "tertiary-fixed-dim": "#9dcedd",
+                    "secondary-fixed-dim": "#ffba47",
+                    "tertiary": "#00272f",
+                    "surface-bright": "#fff8f7",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#4d0408",
+                    "outline": "#897270",
+                    "primary-container": "#6b1b1b",
+                    "surface-container-highest": "#f1dedd",
+                    "surface": "#fff8f7",
+                    "outline-variant": "#dcc0be",
+                    "on-secondary-container": "#6e4900",
+                    "on-tertiary-fixed": "#001f26",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#003e4a",
+                    "surface-container-high": "#f7e4e2",
+                    "secondary": "#805600",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#e8d6d4",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#184d59",
+                    "on-error": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#fdb742",
+                    "on-surface": "#231919",
+                    "inverse-primary": "#ffb3ae",
+                    "on-primary-fixed-variant": "#7e2928",
+                    "on-secondary-fixed-variant": "#614000",
+                    "surface-tint": "#9d403d",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#ffb3ae",
+                    "on-secondary-fixed": "#291800",
+                    "on-tertiary-container": "#78a9b7",
+                    "primary-fixed": "#ffdad7",
+                    "on-surface-variant": "#554241",
+                    "secondary-fixed": "#ffddb0",
+                    "inverse-surface": "#392e2d",
+                    "inverse-on-surface": "#ffedeb",
+                    "surface-container-low": "#fff0ef",
+                    "on-primary-container": "#f1817b",
+                    "tertiary-fixed": "#b9ebfa",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#410004",
+                    "background": "#fff8f7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "margin-desktop": "40px",
+                    "gutter": "24px",
+                    "base": "8px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "h1": ["Newsreader"],
+                    "h3": ["Newsreader"],
+                    "h2": ["Newsreader"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "600"}],
+                    "h1": ["40px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased h-screen overflow-hidden flex">
+<!-- Shared Component: SideNavBar -->
+<nav class="hidden md:flex bg-surface border-r border-outline-variant fixed left-0 top-0 h-full flex-col p-base gap-2 z-40 docked w-64">
+<!-- Brand Header -->
+<div class="px-3 py-4 mb-base border-b border-outline-variant">
+<h1 class="font-h3 text-h3 text-primary mb-1">VIP Portal</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Academic Careers</p>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 flex flex-col gap-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-all duration-200 scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-all duration-200 scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-md text-label-md">Browse Listings</span>
+</a>
+<!-- Active State Navigation -->
+<a class="flex items-center gap-3 px-3 py-2 bg-primary text-on-primary rounded-lg font-bold transition-all duration-200 scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">assignment</span>
+<span class="font-label-md text-label-md">My Applications</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-all duration-200 scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">mail</span>
+<span class="font-label-md text-label-md">Messages</span>
+</a>
+
+
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-all duration-200 scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">event_available</span>
+<span class="font-label-md text-label-md">Interviews</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-all duration-200 scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</div>
+<!-- User Footer Area -->
+<div class="mt-auto pt-4 border-t border-outline-variant flex items-center gap-3 px-3 py-2">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-md text-label-md">
+                JA
+            </div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface">Jobayer Alam</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs">Student ID: 202610</p>
+</div>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-1 ml-0 md:ml-64 overflow-y-auto w-full">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-gutter">
+<!-- Page Header -->
+<header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-outline-variant pb-6">
+<div>
+<h2 class="font-h1 text-h1 text-primary mb-2">My Applications</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Track and manage your academic internship progress.</p>
+</div>
+</header>
+<!-- Controls (Search & Filter) -->
+<div class="flex flex-col md:flex-row gap-4 mb-8">
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-outline bg-surface-container-lowest text-on-surface rounded-DEFAULT focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md placeholder:text-on-surface-variant transition-colors" placeholder="Search by company or role..." type="text">
+</div>
+<div class="relative w-full md:w-48">
+<select class="w-full pl-4 pr-10 py-2 border border-outline bg-surface-container-lowest text-on-surface rounded-DEFAULT focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md appearance-none cursor-pointer transition-colors">
+<option value="">All Statuses</option>
+<option value="pending">Pending</option>
+<option value="reviewed">Reviewed</option>
+<option value="accepted">Accepted</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-outline pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+<!-- Content Canvas: Applications List -->
+<div class="flex flex-col gap-3">
+<!-- Listing Card 1: Petronas -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded-DEFAULT border-l-4 border-l-secondary-container hover:bg-surface-container-lowest transition-colors flex flex-col md:flex-row md:items-center justify-between p-4 md:p-6 gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-1">
+<h3 class="font-label-md text-label-md text-on-surface uppercase tracking-wide">Software Engineering Intern</h3>
+<span class="inline-block px-2 py-0.5 rounded-sm bg-on-surface-variant/10 text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">Pending</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Petronas</p>
+</div>
+<div class="flex flex-col md:items-end gap-1">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Applied: <span class="font-label-md text-label-md text-on-surface font-normal">March 15, 2026</span></p>
+</div>
+<div class="mt-4 md:mt-0 md:ml-8 border-t border-outline-variant md:border-none pt-4 md:pt-0">
+<button class="w-full md:w-auto px-4 py-2 border border-primary text-primary font-label-md text-label-md rounded-DEFAULT hover:bg-primary/5 transition-colors">View Details</button>
+</div>
+</div>
+<!-- Listing Card 2: Microsoft -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded-DEFAULT border-l-4 border-l-secondary-container hover:bg-surface-container-lowest transition-colors flex flex-col md:flex-row md:items-center justify-between p-4 md:p-6 gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-1">
+<h3 class="font-label-md text-label-md text-on-surface uppercase tracking-wide">Data Analyst Intern</h3>
+<span class="inline-block px-2 py-0.5 rounded-sm bg-secondary/10 text-secondary font-label-sm text-label-sm uppercase tracking-wider">Reviewed</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Microsoft</p>
+</div>
+<div class="flex flex-col md:items-end gap-1">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Applied: <span class="font-label-md text-label-md text-on-surface font-normal">March 22, 2026</span></p>
+</div>
+<div class="mt-4 md:mt-0 md:ml-8 border-t border-outline-variant md:border-none pt-4 md:pt-0">
+<button class="w-full md:w-auto px-4 py-2 border border-primary text-primary font-label-md text-label-md rounded-DEFAULT hover:bg-primary/5 transition-colors">View Details</button>
+</div>
+</div>
+<!-- Listing Card 3: Google -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded-DEFAULT border-l-4 border-l-secondary-container hover:bg-surface-container-lowest transition-colors flex flex-col md:flex-row md:items-center justify-between p-4 md:p-6 gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-1">
+<h3 class="font-label-md text-label-md text-on-surface uppercase tracking-wide">Frontend Developer Intern</h3>
+<span class="inline-block px-2 py-0.5 rounded-sm bg-primary-container/10 text-primary-container font-label-sm text-label-sm uppercase tracking-wider">Accepted</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Google</p>
+</div>
+<div class="flex flex-col md:items-end gap-1">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Applied: <span class="font-label-md text-label-md text-on-surface font-normal">April 2, 2026</span></p>
+</div>
+<div class="mt-4 md:mt-0 md:ml-8 border-t border-outline-variant md:border-none pt-4 md:pt-0">
+<button class="w-full md:w-auto px-4 py-2 border border-primary text-primary font-label-md text-label-md rounded-DEFAULT hover:bg-primary/5 transition-colors">View Details</button>
+</div>
+</div>
+<!-- Listing Card 4: DHL -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded-DEFAULT border-l-4 border-l-secondary-container hover:bg-surface-container-lowest transition-colors flex flex-col md:flex-row md:items-center justify-between p-4 md:p-6 gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-1">
+<h3 class="font-label-md text-label-md text-on-surface uppercase tracking-wide">IT Support Intern</h3>
+<span class="inline-block px-2 py-0.5 rounded-sm bg-on-surface-variant/10 text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">Pending</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">DHL</p>
+</div>
+<div class="flex flex-col md:items-end gap-1">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Applied: <span class="font-label-md text-label-md text-on-surface font-normal">April 10, 2026</span></p>
+</div>
+<div class="mt-4 md:mt-0 md:ml-8 border-t border-outline-variant md:border-none pt-4 md:pt-0">
+<button class="w-full md:w-auto px-4 py-2 border border-primary text-primary font-label-md text-label-md rounded-DEFAULT hover:bg-primary/5 transition-colors">View Details</button>
+</div>
+</div>
+</div>
+<!-- Pagination (Mock) -->
+<div class="mt-8 flex items-center justify-center gap-2">
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center bg-primary text-on-primary font-label-sm text-label-sm rounded transition-colors">1</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant text-on-surface font-label-sm text-label-sm rounded hover:bg-surface-container transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+</body></html>

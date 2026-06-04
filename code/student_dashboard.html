@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>VIP Portal - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Newsreader:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#4d0408",
+                        "surface-container-low": "#fff0ef",
+                        "tertiary-fixed": "#b9ebfa",
+                        "surface-dim": "#e8d6d4",
+                        "surface-container-high": "#f7e4e2",
+                        "on-secondary-container": "#6e4900",
+                        "primary-fixed-dim": "#ffb3ae",
+                        "on-primary-container": "#f1817b",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#ffedeb",
+                        "secondary-fixed": "#ffddb0",
+                        "primary-container": "#6b1b1b",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#392e2d",
+                        "secondary": "#805600",
+                        "on-tertiary-fixed": "#001f26",
+                        "surface": "#fff8f7",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#291800",
+                        "tertiary": "#00272f",
+                        "on-surface-variant": "#554241",
+                        "on-tertiary-container": "#78a9b7",
+                        "surface-bright": "#fff8f7",
+                        "on-surface": "#231919",
+                        "on-tertiary-fixed-variant": "#184d59",
+                        "surface-container": "#fdeae8",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#7e2928",
+                        "outline-variant": "#dcc0be",
+                        "primary-fixed": "#ffdad7",
+                        "secondary-fixed-dim": "#ffba47",
+                        "on-background": "#231919",
+                        "tertiary-fixed-dim": "#9dcedd",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#614000",
+                        "surface-variant": "#f1dedd",
+                        "inverse-primary": "#ffb3ae",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#f1dedd",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#897270",
+                        "surface-tint": "#9d403d",
+                        "tertiary-container": "#003e4a",
+                        "on-primary-fixed": "#410004",
+                        "background": "#fff8f7",
+                        "secondary-container": "#fdb742"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "h2": ["Newsreader"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "h3": ["Newsreader"],
+                        "h1": ["Newsreader"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "600" }],
+                        "h2": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "h1": ["40px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen fixed left-0 top-0 z-40 w-64 overflow-y-auto border-r border-[#E5E1DA] dark:border-slate-800 bg-[#FFFFFF] dark:bg-slate-900 transition-all duration-150 ease-in-out">
+<div class="p-6 border-b border-[#E5E1DA] dark:border-slate-800 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-variant rounded-full overflow-hidden flex-shrink-0 flex items-center justify-center">
+<img alt="University Crest" class="w-full h-full object-cover" data-alt="close up of a traditional university crest in deep maroon and gold on a white background, professional institutional logo style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQj53n5epibEuS3oAB1RhGwnY6X5mdBY4lGKfn8xlGPa_1RHmWv9rXqOaZ8_Ek3cgz5ARSA0IvA8CPdAtSDsRO0dOqmb1j8NuHM8oREKqOui0w1DYGOYR9u7G85OovPGbRu2rJbtyTobDSvk94M2-EwX_YOuapUlUSr-EZUBJB5JUMUazB8hYtFhT2YH0GbmCQ988FZFaBS0fLeQyz5zZUI-Olgg9cnMIsClNK9t_1w9abtEcbDwsBV-fgpQr7Ubdctrc7mM_GIfCD">
+</div>
+<div>
+<h1 class="text-xl font-black text-[#6B1B1B] dark:text-white uppercase font-['Newsreader'] serif antialiased">VIP Portal</h1>
+<p class="font-body-sm text-on-surface-variant text-sm">University Internships</p>
+</div>
+</div>
+<div class="flex-1 py-6 flex flex-col gap-2">
+<a class="text-[#6B1B1B] dark:text-red-400 font-bold border-l-4 border-[#C4860A] bg-slate-50 dark:bg-slate-800/50 py-3 px-4 flex items-center gap-3 font-label-md transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="text-slate-500 dark:text-slate-400 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 dark:hover:bg-slate-800/30 hover:text-[#6B1B1B] flex items-center gap-3 font-label-md transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">search</span>
+                Browse Listings
+            </a>
+<a class="text-slate-500 dark:text-slate-400 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 dark:hover:bg-slate-800/30 hover:text-[#6B1B1B] flex items-center gap-3 font-label-md transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">assignment</span>
+                My Applications
+            </a>
+<a class="text-slate-500 dark:text-slate-400 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 dark:hover:bg-slate-800/30 hover:text-[#6B1B1B] flex items-center gap-3 font-label-md transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">mail</span>
+                Messages
+            </a>
+
+
+<a class="text-slate-500 dark:text-slate-400 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 dark:hover:bg-slate-800/30 hover:text-[#6B1B1B] flex items-center gap-3 font-label-md transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+                Interviews
+            </a>
+<a class="text-slate-500 dark:text-slate-400 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 dark:hover:bg-slate-800/30 hover:text-[#6B1B1B] flex items-center gap-3 font-label-md transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">person</span>
+                Profile
+            </a>
+</div>
+<div class="mt-auto border-t border-[#E5E1DA] dark:border-slate-800 p-4">
+<a class="text-slate-500 dark:text-slate-400 py-3 px-4 border-l-4 border-transparent hover:bg-slate-50 dark:hover:bg-slate-800/30 hover:text-[#6B1B1B] flex items-center gap-3 font-label-md transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-64 p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto w-full flex flex-col gap-gutter">
+<!-- Welcome Banner -->
+<header class="bg-surface-container-lowest border border-[#E5E1DA] rounded-DEFAULT p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div>
+<h2 class="font-h2 text-primary-container mb-2 text-h2 font-['Newsreader'] serif">Welcome back, Jobayer Alam</h2>
+<p class="font-body-lg text-on-surface-variant text-body-lg">Bachelor of Computer Engineering • Year 3</p>
+</div>
+<div class="flex gap-4">
+<button class="bg-primary-container text-on-primary font-label-md px-6 py-3 rounded-DEFAULT hover:bg-primary-fixed-variant transition-colors border border-transparent">
+                    New Application
+                </button>
+</div>
+</header>
+<!-- Stats Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Stat Card 1 -->
+<div class="bg-surface-container-lowest border border-[#E5E1DA] border-l-4 border-l-[#C4860A] rounded-DEFAULT p-6 flex items-center justify-between">
+<div>
+<p class="font-label-sm text-on-surface-variant text-label-sm uppercase tracking-wider mb-1">Applications Sent</p>
+<p class="font-h1 text-on-surface text-h1">12</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">send</span>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-surface-container-lowest border border-[#E5E1DA] border-l-4 border-l-[#C4860A] rounded-DEFAULT p-6 flex items-center justify-between">
+<div>
+<p class="font-label-sm text-on-surface-variant text-label-sm uppercase tracking-wider mb-1">Interviews Scheduled</p>
+<p class="font-h1 text-on-surface text-h1">3</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">event</span>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-surface-container-lowest border border-[#E5E1DA] border-l-4 border-l-[#C4860A] rounded-DEFAULT p-6 flex items-center justify-between">
+<div>
+<p class="font-label-sm text-on-surface-variant text-label-sm uppercase tracking-wider mb-1">Offers Received</p>
+<p class="font-h1 text-on-surface text-h1">1</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">workspace_premium</span>
+</div>
+</div>
+</div>
+<!-- Recent Applications Table Section -->
+<section class="bg-surface-container-lowest border border-[#E5E1DA] rounded-DEFAULT flex flex-col">
+<div class="p-6 border-b border-[#E5E1DA] flex justify-between items-center">
+<h3 class="font-h3 text-primary-container text-h3 font-['Newsreader'] serif">Recent Applications</h3>
+<a class="font-label-md text-primary-container text-label-md hover:underline flex items-center gap-1" href="#">
+                    View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-variant/50 border-b border-[#E5E1DA]">
+<th class="p-4 font-label-sm text-on-surface-variant text-label-sm font-semibold">Company</th>
+<th class="p-4 font-label-sm text-on-surface-variant text-label-sm font-semibold">Role</th>
+<th class="p-4 font-label-sm text-on-surface-variant text-label-sm font-semibold">Date Applied</th>
+<th class="p-4 font-label-sm text-on-surface-variant text-label-sm font-semibold">Status</th>
+<th class="p-4 font-label-sm text-on-surface-variant text-label-sm font-semibold text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#E5E1DA]">
+<tr class="hover:bg-surface-container transition-colors">
+<td class="p-4 font-body-md text-on-surface font-medium">Petronas</td>
+<td class="p-4 font-body-md text-on-surface-variant">Software Engineering Intern</td>
+<td class="p-4 font-body-sm text-on-surface-variant">Apr 12, 2026</td>
+<td class="p-4">
+<span class="inline-block px-3 py-1 bg-[#C4860A]/10 text-[#C4860A] font-label-sm text-label-sm rounded uppercase">Reviewed</span>
+</td>
+<td class="p-4 text-right">
+<button class="text-primary-container hover:text-primary-fixed-variant transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors">
+<td class="p-4 font-body-md text-on-surface font-medium">Microsoft</td>
+<td class="p-4 font-body-md text-on-surface-variant">Data Analyst Intern</td>
+<td class="p-4 font-body-sm text-on-surface-variant">Apr 02, 2026</td>
+<td class="p-4">
+<span class="inline-block px-3 py-1 bg-[#6B7280]/10 text-[#6B7280] font-label-sm text-label-sm rounded uppercase">Pending</span>
+</td>
+<td class="p-4 text-right">
+<button class="text-primary-container hover:text-primary-fixed-variant transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors">
+<td class="p-4 font-body-md text-on-surface font-medium">Google</td>
+<td class="p-4 font-body-md text-on-surface-variant">Frontend Developer Intern</td>
+<td class="p-4 font-body-sm text-on-surface-variant">Mar 25, 2026</td>
+<td class="p-4">
+<span class="inline-block px-3 py-1 bg-[#6B1B1B]/10 text-[#6B1B1B] font-label-sm text-label-sm rounded uppercase">Accepted</span>
+</td>
+<td class="p-4 text-right">
+<button class="text-primary-container hover:text-primary-fixed-variant transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors">
+<td class="p-4 font-body-md text-on-surface font-medium">DHL</td>
+<td class="p-4 font-body-md text-on-surface-variant">IT Support Intern</td>
+<td class="p-4 font-body-sm text-on-surface-variant">Mar 15, 2026</td>
+<td class="p-4">
+<span class="inline-block px-3 py-1 bg-[#6B7280]/10 text-[#6B7280] font-label-sm text-label-sm rounded uppercase">Pending</span>
+</td>
+<td class="p-4 text-right">
+<button class="text-primary-container hover:text-primary-fixed-variant transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+
+
+
+
+</body></html>
