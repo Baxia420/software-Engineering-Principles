@@ -13,65 +13,82 @@ export default function CompanyDashboard() {
 
   useEffect(() => {
     async function loadDashboard() {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-
-      // 1. Fetch Company Profile
-      const { data: companyProfile } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-      if (companyProfile) {
-        setProfile(companyProfile);
-        if (!companyProfile.bio) {
-          navigate('/profile-setup');
+      try {
+        const { data: userData, error: userError } = await supabase.auth.getUser();
+        if (userError || !userData?.user) {
+          console.warn('No active session in CompanyDashboard:', userError?.message);
+          localStorage.removeItem('role');
+          navigate('/auth');
           return;
         }
-      }
 
-      // 2. Fetch Postings count & Applications if approved
-      const { data: myInternships } = await supabase
-        .from('internships')
-        .select('id')
-        .eq('supervisor_id', user.id);
+        const user = userData.user;
 
-      const internshipIds = myInternships?.map(i => i.id) || [];
-      const postingsCount = internshipIds.length;
-
-      if (internshipIds.length > 0) {
-        const { data: apps } = await supabase
-          .from('applications')
-          .select(`
-            *,
-            profiles (
-              first_name,
-              last_name,
-              matric_number,
-              department,
-              skills
-            ),
-            internships (
-              title
-            )
-          `)
-          .in('internship_id', internshipIds)
-          .order('created_at', { ascending: false });
-
-        if (apps) {
-          setApplications(apps);
-          const applicants = apps.length;
-          const pending = apps.filter(a => a.status === 'pending').length;
-          setStats({ postings: postingsCount, applicants, pending });
+        // 1. Fetch Company Profile
+        const { data: companyProfile, error: profileError } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', user.id)
+          .single();
+        
+        if (profileError) {
+          console.warn('Error fetching company profile:', profileError.message);
         }
-      } else {
-        setStats({ postings: postingsCount, applicants: 0, pending: 0 });
-      }
 
-      setLoading(false);
+        if (companyProfile) {
+          setProfile(companyProfile);
+          if (!companyProfile.bio) {
+            navigate('/profile-setup');
+            return;
+          }
+        }
+
+        // 2. Fetch Postings count & Applications if approved
+        const { data: myInternships } = await supabase
+          .from('internships')
+          .select('id')
+          .eq('supervisor_id', user.id);
+
+        const internshipIds = myInternships?.map(i => i.id) || [];
+        const postingsCount = internshipIds.length;
+
+        if (internshipIds.length > 0) {
+          const { data: apps } = await supabase
+            .from('applications')
+            .select(`
+              *,
+              profiles (
+                first_name,
+                last_name,
+                matric_number,
+                department,
+                skills
+              ),
+              internships (
+                title
+              )
+            `)
+            .in('internship_id', internshipIds)
+            .order('created_at', { ascending: false });
+
+          if (apps) {
+            setApplications(apps);
+            const applicants = apps.length;
+            const pending = apps.filter(a => a.status === 'pending').length;
+            setStats({ postings: postingsCount, applicants, pending });
+          }
+        } else {
+          setStats({ postings: postingsCount, applicants: 0, pending: 0 });
+        }
+
+      } catch (err) {
+        console.error('Error loading company dashboard data:', err);
+      } finally {
+        setLoading(false);
+      }
     }
     loadDashboard();
-  }, []);
+  }, [navigate]);
 
   if (loading) {
     return (

@@ -138,14 +138,28 @@ export default function ProfileSetup() {
 
   useEffect(() => {
     async function loadProfile() {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
+      try {
+        const { data: userData, error: userError } = await supabase.auth.getUser();
+        if (userError || !userData?.user) {
+          console.warn('No active session:', userError?.message);
+          localStorage.removeItem('role');
+          navigate('/auth');
+          return;
+        }
+
+        const user = userData.user;
         setUserId(user.id);
-        const { data } = await supabase
+        
+        const { data, error } = await supabase
           .from('profiles')
           .select('*')
           .eq('id', user.id)
           .single();
+
+        if (error) {
+          console.warn('Error fetching profile from DB:', error.message);
+        }
+
         if (data) {
           setRole(data.role || 'student');
           setFirstName(data.first_name || '');
@@ -168,13 +182,20 @@ export default function ProfileSetup() {
           setCompanyName(meta.company_name || '');
           setDepartment(meta.department || '');
         }
+      } catch (err) {
+        console.error('Error loading profile setup details:', err);
       }
     }
     loadProfile();
-  }, []);
+  }, [navigate]);
 
   const handleSave = async (e) => {
     e.preventDefault();
+    if (!userId) {
+      alert('User session not loaded. Please log in again.');
+      navigate('/auth');
+      return;
+    }
     
     // Check if the profile already exists in DB
     const { data: existing } = await supabase
@@ -244,6 +265,9 @@ export default function ProfileSetup() {
     const file = e.target.files[0];
     if (!file) return;
     try {
+      if (!userId) {
+        throw new Error('User session not loaded. Please refresh the page and log in again.');
+      }
       setUploadingAvatar(true);
       const fileExt = file.name.split('.').pop();
       const fileName = `${userId}-${Date.now()}.${fileExt}`;
@@ -272,6 +296,9 @@ export default function ProfileSetup() {
     const file = e.target.files[0];
     if (!file) return;
     try {
+      if (!userId) {
+        throw new Error('User session not loaded. Please refresh the page and log in again.');
+      }
       setUploadingResume(true);
       const fileExt = file.name.split('.').pop();
       const fileName = `${userId}-${Date.now()}.${fileExt}`;

@@ -62,43 +62,66 @@ export default function App() {
   useEffect(() => {
     // Helper to resolve the user's role from the profiles table first, metadata second
     async function resolveRole(userId, metadataRole) {
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('role')
-        .eq('id', userId)
-        .single();
-      return profile?.role || metadataRole || 'student';
+      try {
+        const { data: profile, error } = await supabase
+          .from('profiles')
+          .select('role')
+          .eq('id', userId)
+          .single();
+        if (error) {
+          console.warn('Profile role query error or no row found:', error.message);
+        }
+        return profile?.role || metadataRole || 'student';
+      } catch (err) {
+        console.error('Unexpected error in resolveRole:', err);
+        return metadataRole || 'student';
+      }
     }
 
     // Initial session check
     supabase.auth.getSession().then(async ({ data: { session } }) => {
-      if (session) {
-        const userRole = await resolveRole(
-          session.user.id,
-          session.user.user_metadata?.role
-        );
-        localStorage.setItem('role', userRole);
-      } else {
-        localStorage.removeItem('role');
+      try {
+        if (session) {
+          const userRole = await resolveRole(
+            session.user.id,
+            session.user.user_metadata?.role
+          );
+          localStorage.setItem('role', userRole);
+        } else {
+          localStorage.removeItem('role');
+        }
+      } catch (err) {
+        console.error('Error in initial session check handler:', err);
+      } finally {
+        setLoading(false);
       }
+    }).catch(err => {
+      console.error('Failed to get session:', err);
       setLoading(false);
     });
 
     // Listen to changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      if (session) {
-        const userRole = await resolveRole(
-          session.user.id,
-          session.user.user_metadata?.role
-        );
-        localStorage.setItem('role', userRole);
-      } else {
-        localStorage.removeItem('role');
+      try {
+        if (session) {
+          const userRole = await resolveRole(
+            session.user.id,
+            session.user.user_metadata?.role
+          );
+          localStorage.setItem('role', userRole);
+        } else {
+          localStorage.removeItem('role');
+        }
+      } catch (err) {
+        console.error('Error in auth state change handler:', err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      if (subscription) subscription.unsubscribe();
+    };
   }, []);
 
   if (loading) {

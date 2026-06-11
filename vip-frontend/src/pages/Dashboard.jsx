@@ -14,78 +14,95 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function loadDashboardData() {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-
-      // 1. Load Profile
-      const { data: profileData } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-      if (profileData) {
-        setProfile(profileData);
-        if (!profileData.bio) {
-          navigate('/profile-setup');
+      try {
+        const { data: userData, error: userError } = await supabase.auth.getUser();
+        if (userError || !userData?.user) {
+          console.warn('No active session in Dashboard:', userError?.message);
+          localStorage.removeItem('role');
+          navigate('/auth');
           return;
         }
-      }
 
-      // 2. Load Stats
-      const { data: apps } = await supabase
-        .from('applications')
-        .select('status')
-        .eq('student_id', user.id);
-      
-      if (apps) {
-        const sent = apps.length;
-        const pending = apps.filter(a => a.status === 'pending').length;
-        const approved = apps.filter(a => a.status === 'approved').length;
-        setStats({ sent, pending, approved });
-      }
+        const user = userData.user;
 
-      // 3. Load Recent Applications
-      const { data: recentApps } = await supabase
-        .from('applications')
-        .select(`
-          id,
-          created_at,
-          status,
-          internships (
+        // 1. Load Profile
+        const { data: profileData, error: profileError } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', user.id)
+          .single();
+        
+        if (profileError) {
+          console.warn('Error fetching profile:', profileError.message);
+        }
+
+        if (profileData) {
+          setProfile(profileData);
+          if (!profileData.bio) {
+            navigate('/profile-setup');
+            return;
+          }
+        }
+
+        // 2. Load Stats
+        const { data: apps } = await supabase
+          .from('applications')
+          .select('status')
+          .eq('student_id', user.id);
+        
+        if (apps) {
+          const sent = apps.length;
+          const pending = apps.filter(a => a.status === 'pending').length;
+          const approved = apps.filter(a => a.status === 'approved').length;
+          setStats({ sent, pending, approved });
+        }
+
+        // 3. Load Recent Applications
+        const { data: recentApps } = await supabase
+          .from('applications')
+          .select(`
+            id,
+            created_at,
+            status,
+            internships (
+              id,
+              title,
+              company
+            )
+          `)
+          .eq('student_id', user.id)
+          .order('created_at', { ascending: false })
+          .limit(4);
+        if (recentApps) {
+          setRecentApplications(recentApps);
+        }
+
+        // 4. Load Recent Discussions
+        const { data: threads } = await supabase
+          .from('forum_threads')
+          .select(`
             id,
             title,
-            company
-          )
-        `)
-        .eq('student_id', user.id)
-        .order('created_at', { ascending: false })
-        .limit(4);
-      if (recentApps) {
-        setRecentApplications(recentApps);
-      }
+            created_at,
+            profiles (
+              first_name,
+              last_name
+            )
+          `)
+          .order('created_at', { ascending: false })
+          .limit(3);
+        if (threads) {
+          setRecentThreads(threads);
+        }
 
-      // 4. Load Recent Discussions
-      const { data: threads } = await supabase
-        .from('forum_threads')
-        .select(`
-          id,
-          title,
-          created_at,
-          profiles (
-            first_name,
-            last_name
-          )
-        `)
-        .order('created_at', { ascending: false })
-        .limit(3);
-      if (threads) {
-        setRecentThreads(threads);
+      } catch (err) {
+        console.error('Error loading dashboard data:', err);
+      } finally {
+        setLoading(false);
       }
-
-      setLoading(false);
     }
     loadDashboardData();
-  }, []);
+  }, [navigate]);
 
   if (loading) {
     return (
