@@ -37,10 +37,6 @@ export default function CompanyDashboard() {
 
         if (companyProfile) {
           setProfile(companyProfile);
-          if (!companyProfile.bio) {
-            navigate('/profile-setup');
-            return;
-          }
         }
 
         // 2. Fetch Postings count & Applications if approved

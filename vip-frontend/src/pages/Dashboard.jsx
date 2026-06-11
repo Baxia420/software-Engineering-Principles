@@ -19,10 +19,6 @@ export default function Dashboard() {
       navigate('/auth');
       return;
     }
-    if (profile && !profile.bio) {
-      navigate('/profile-setup');
-      return;
-    }
 
     async function loadDashboardData() {
       try {
