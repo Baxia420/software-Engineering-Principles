@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
+import { useAuth } from '../AuthContext';
 import SideNavBar from '../components/SideNavBar';
 import TopNavBar from '../components/TopNavBar';
 
 export default function CreateListingForm() {
   const navigate = useNavigate();
-  const [profile, setProfile] = useState(null);
+  const { user, profile } = useAuth();
   const [jobTitle, setJobTitle] = useState('');
   const [company, setCompany] = useState('');
   const [location, setLocation] = useState('');
@@ -19,23 +20,11 @@ export default function CreateListingForm() {
   const [userId, setUserId] = useState('');
 
   useEffect(() => {
-    async function getSupervisorId() {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        setUserId(user.id);
-        const { data } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', user.id)
-          .single();
-        if (data) {
-          setProfile(data);
-          setCompany(data.company_name || 'My Company');
-        }
-      }
+    if (user && profile) {
+      setUserId(user.id);
+      setCompany(profile.company_name || 'My Company');
     }
-    getSupervisorId();
-  }, []);
+  }, [user, profile]);
 
   const handleAddSkill = (e) => {
     if (e.key === 'Enter') {

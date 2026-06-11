@@ -25,7 +25,7 @@ export default function InternshipDetails() {
 
       const { data, error } = await supabase
         .from('internships')
-        .select('*')
+        .select('*, profiles(avatar_url)')
         .eq('id', id)
         .single();
 
@@ -70,7 +70,11 @@ export default function InternshipDetails() {
           {/* Header Section */}
           <header className="flex items-start gap-8 mb-12 pb-8 border-b border-outline-variant">
             <div className="w-24 h-24 rounded border border-outline-variant bg-surface-container-lowest flex items-center justify-center shrink-0 p-2 overflow-hidden shadow-sm font-bold text-primary-container text-2xl">
-              {listing.company.charAt(0).toUpperCase()}
+              {listing.profiles?.avatar_url ? (
+                <img src={listing.profiles.avatar_url} alt={listing.company} className="w-full h-full object-cover" />
+              ) : (
+                listing.company.charAt(0).toUpperCase()
+              )}
             </div>
             <div className="flex-1 pt-1">
               <div className="inline-flex items-center px-2 py-1 mb-3 rounded bg-gray-600/10 text-gray-600 font-label-sm text-label-sm uppercase tracking-wider">

@@ -15,7 +15,7 @@ export default function BrowseListings() {
     async function loadListings() {
       const { data, error } = await supabase
         .from('internships')
-        .select('*')
+        .select('*, profiles(avatar_url)')
         .order('created_at', { ascending: false });
       if (data) {
         setListings(data);
@@ -69,6 +69,7 @@ export default function BrowseListings() {
                   title={listing.title}
                   company={`${listing.company} • ${listing.location}`}
                   status={listing.type}
+                  avatarUrl={listing.profiles?.avatar_url}
                   onViewDetails={() => navigate(`/internship-details?id=${listing.id}`)}
                 />
               ))

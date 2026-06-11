@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
+import { useAuth } from '../AuthContext';
 
 const ENGINEERING_SKILLS = [
   // Software / Computing
@@ -120,6 +121,7 @@ const ENGINEERING_SKILLS = [
 
 export default function ProfileSetup() {
   const navigate = useNavigate();
+  const { refreshProfile } = useAuth();
   const [userId, setUserId] = useState('');
   const [role, setRole] = useState('student');
   const [firstName, setFirstName] = useState('');
@@ -250,6 +252,7 @@ export default function ProfileSetup() {
     if (error) {
       alert(error.message);
     } else {
+      await refreshProfile(userId);
       alert('Profile updated successfully!');
       if (role === 'company') {
         navigate('/company/dashboard');

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function InternshipCard({ id, title, company, status, appliedDate, onViewDetails, actionLabel = "View Details", messageCount = 0 }) {
+export default function InternshipCard({ id, title, company, status, appliedDate, onViewDetails, actionLabel = "View Details", messageCount = 0, avatarUrl }) {
   const getStatusStyle = (status) => {
     switch (status?.toLowerCase()) {
       case 'accepted':
@@ -18,8 +18,14 @@ export default function InternshipCard({ id, title, company, status, appliedDate
 
   return (
     <div className="group bg-surface-container-lowest border border-outline-variant rounded-DEFAULT border-l-4 border-l-secondary-container hover:border-l-primary hover:bg-surface-container-low/30 shadow-sm hover:shadow-md transition-all duration-300 ease-in-out flex flex-col md:flex-row md:items-center justify-between p-4 md:p-6 gap-4">
-      <div className="flex-1">
-        <div className="flex items-center flex-wrap gap-3 mb-1">
+      <div className="flex-1 flex gap-4">
+        {avatarUrl && (
+          <div className="w-12 h-12 rounded border border-outline-variant bg-surface-container-lowest flex items-center justify-center shrink-0 overflow-hidden shadow-sm mt-1">
+            <img src={avatarUrl} alt={company} className="w-full h-full object-cover" />
+          </div>
+        )}
+        <div className="flex-1">
+          <div className="flex items-center flex-wrap gap-3 mb-1">
           <h3 className="font-label-md text-label-md text-on-surface uppercase tracking-wide">{title}</h3>
           <span className={`inline-block px-2 py-0.5 rounded-sm font-label-sm text-label-sm uppercase tracking-wider ${getStatusStyle(status)}`}>
             {status}
@@ -31,7 +37,8 @@ export default function InternshipCard({ id, title, company, status, appliedDate
             </span>
           )}
         </div>
-        <p className="font-body-md text-body-md text-on-surface-variant">{company}</p>
+          <p className="font-body-md text-body-md text-on-surface-variant">{company}</p>
+        </div>
       </div>
       {appliedDate && (
         <div className="flex flex-col md:items-end gap-1">
