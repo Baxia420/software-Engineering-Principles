@@ -58,7 +58,8 @@ export default function CompanyDashboard() {
                 last_name,
                 matric_number,
                 department,
-                skills
+                skills,
+                avatar_url
               ),
               internships (
                 title
@@ -214,8 +215,10 @@ export default function CompanyDashboard() {
                           <tr key={app.id} className="hover:bg-surface-container transition-colors group">
                             <td className="px-6 py-4 whitespace-nowrap">
                               <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs shrink-0">
-                                  {app.profiles?.first_name?.charAt(0)}{app.profiles?.last_name?.charAt(0)}
+                                <div className="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs shrink-0 overflow-hidden">
+                                  {app.profiles?.avatar_url ? (
+                                    <img src={app.profiles.avatar_url} alt="Avatar" className="w-full h-full object-cover" />
+                                  ) : `${app.profiles?.first_name?.charAt(0) || ''}${app.profiles?.last_name?.charAt(0) || ''}`.toUpperCase()}
                                 </div>
                                 <div>
                                   <p className="font-label-md text-label-md text-on-surface">{studentName}</p>

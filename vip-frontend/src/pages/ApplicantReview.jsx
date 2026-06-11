@@ -32,7 +32,8 @@ export default function ApplicantReview() {
           matric_number,
           bio,
           skills,
-          department
+          department,
+          avatar_url
         ),
         internships (
           title,
@@ -157,8 +158,10 @@ export default function ApplicantReview() {
               <section className="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 relative overflow-hidden shadow-sm">
                 <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary-container"></div>
                 <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-                  <div className="w-24 h-24 rounded-lg border border-outline-variant bg-primary-container text-on-primary flex items-center justify-center text-3xl font-bold font-h1 shrink-0">
-                    {initials}
+                  <div className="w-24 h-24 rounded-lg border border-outline-variant bg-primary-container text-on-primary flex items-center justify-center text-3xl font-bold font-h1 shrink-0 overflow-hidden">
+                    {student?.avatar_url ? (
+                      <img src={student.avatar_url} alt="Profile" className="w-full h-full object-cover" />
+                    ) : initials}
                   </div>
                   <div className="flex-1 w-full">
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
