@@ -64,9 +64,16 @@ export default function ApplicationForm() {
       const fileName = `${user.id}-${Date.now()}.${fileExt}`;
       const filePath = `${fileName}`;
 
-      const { error: uploadError } = await supabase.storage
+      // 8-second timeout promise
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Upload timed out. Please verify that the "resumes" storage bucket exists and is set to "Public" in your Supabase dashboard.')), 8000)
+      );
+
+      const uploadPromise = supabase.storage
         .from('resumes')
         .upload(filePath, file);
+
+      const { data: uploadData, error: uploadError } = await Promise.race([uploadPromise, timeoutPromise]);
 
       if (uploadError) throw uploadError;
 
@@ -77,7 +84,7 @@ export default function ApplicationForm() {
       setResumeUrl(publicUrl);
       setResumeName(file.name);
     } catch (err) {
-      alert(err.message || 'Error uploading file.');
+      alert(err.message || 'Error uploading file. Make sure the resumes bucket exists and is set to public.');
     } finally {
       setUploading(false);
     }

@@ -24,45 +24,50 @@ export default function Authentication() {
 
   const handleAccessPortal = async (e) => {
     e.preventDefault();
-    const emailInput = document.getElementById('login-email').value;
-    const passwordInput = document.getElementById('login-password').value;
+    try {
+      const emailInput = document.getElementById('login-email').value;
+      const passwordInput = document.getElementById('login-password').value;
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: emailInput,
-      password: passwordInput,
-    });
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: emailInput,
+        password: passwordInput,
+      });
 
-    if (error) {
-      alert(error.message);
-      return;
-    }
-
-    // Fetch user profile to get their role
-    const { data: profile, error: profileError } = await supabase
-      .from('profiles')
-      .select('role')
-      .eq('id', data.user.id)
-      .single();
-
-    if (profileError || !profile) {
-      const userRole = data.user.user_metadata?.role || 'student';
-      localStorage.setItem('role', userRole);
-      if (userRole === 'company') {
-        navigate('/company/dashboard');
-      } else if (userRole === 'supervisor') {
-        navigate('/supervisor/dashboard');
-      } else {
-        navigate('/dashboard');
+      if (error) {
+        alert(error.message);
+        return;
       }
-    } else {
-      localStorage.setItem('role', profile.role);
-      if (profile.role === 'company') {
-        navigate('/company/dashboard');
-      } else if (profile.role === 'supervisor') {
-        navigate('/supervisor/dashboard');
+
+      // Fetch user profile to get their role
+      const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', data.user.id)
+        .single();
+
+      if (profileError || !profile) {
+        const userRole = data.user.user_metadata?.role || 'student';
+        localStorage.setItem('role', userRole);
+        if (userRole === 'company') {
+          navigate('/company/dashboard');
+        } else if (userRole === 'supervisor') {
+          navigate('/supervisor/dashboard');
+        } else {
+          navigate('/dashboard');
+        }
       } else {
-        navigate('/dashboard');
+        localStorage.setItem('role', profile.role);
+        if (profile.role === 'company') {
+          navigate('/company/dashboard');
+        } else if (profile.role === 'supervisor') {
+          navigate('/supervisor/dashboard');
+        } else {
+          navigate('/dashboard');
+        }
       }
+    } catch (err) {
+      console.error('Login error:', err);
+      alert('Login Error: ' + (err.message || 'Connection failed. Please ensure VITE_SUPABASE_URL is correct and your Supabase service is active.'));
     }
   };
 
