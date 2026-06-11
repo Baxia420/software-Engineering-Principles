@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
+import { useAuth } from '../AuthContext';
 
 export default function SideNavBar() {
   const navigate = useNavigate();
   const location = useLocation();
-  const role = localStorage.getItem('role') || 'student';
-  const [profile, setProfile] = useState(null);
+  const { profile, logout } = useAuth();
+  const role = profile?.role || localStorage.getItem('role') || 'student';
   const [mobileOpen, setMobileOpen] = useState(false);
 
   // Listen for hamburger toggle event from TopNavBar
@@ -21,37 +22,8 @@ export default function SideNavBar() {
     setMobileOpen(false);
   }, [location.pathname]);
 
-  useEffect(() => {
-    async function fetchProfile() {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        const { data } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', user.id)
-          .single();
-        if (data) {
-          setProfile(data);
-        } else {
-          const meta = user.user_metadata || {};
-          setProfile({
-            first_name: meta.first_name || '',
-            last_name: meta.last_name || '',
-            role: meta.role || 'student',
-            matric_number: meta.matric_number || '',
-            company_name: meta.company_name || '',
-            department: meta.department || '',
-            avatar_url: ''
-          });
-        }
-      }
-    }
-    fetchProfile();
-  }, []);
-
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    localStorage.removeItem('role');
+    await logout();
     navigate('/auth');
   };
 

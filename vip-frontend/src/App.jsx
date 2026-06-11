@@ -20,10 +20,16 @@ import ForumThread from './pages/ForumThread';
 import TermsOfService from './pages/TermsOfService';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 
+import { AuthProvider, useAuth } from './AuthContext';
+
 // Route helper to protect pages
 function ProtectedRoute({ children, allowedRoles }) {
+  const { user, profile, loading } = useAuth();
   const role = localStorage.getItem('role');
-  if (!role) {
+  
+  if (loading) return null; // Wait for auth session to settle
+  
+  if (!user || !role) {
     return <Navigate to="/auth" replace />;
   }
   if (allowedRoles && !allowedRoles.includes(role)) {
@@ -36,8 +42,10 @@ function ProtectedRoute({ children, allowedRoles }) {
 
 // Route helper to prevent logged in users from returning to Login page
 function AuthRoute({ children }) {
+  const { user } = useAuth();
   const role = localStorage.getItem('role');
-  if (role) {
+  
+  if (user && role) {
     if (role === 'supervisor') return <Navigate to="/supervisor/dashboard" replace />;
     if (role === 'company') return <Navigate to="/company/dashboard" replace />;
     return <Navigate to="/dashboard" replace />;
@@ -56,73 +64,8 @@ function FallbackRedirect() {
   return <Navigate to="/dashboard" replace />;
 }
 
-export default function App() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Helper to resolve the user's role from the profiles table first, metadata second
-    async function resolveRole(userId, metadataRole) {
-      try {
-        const { data: profile, error } = await supabase
-          .from('profiles')
-          .select('role')
-          .eq('id', userId)
-          .single();
-        if (error) {
-          console.warn('Profile role query error or no row found:', error.message);
-        }
-        return profile?.role || metadataRole || 'student';
-      } catch (err) {
-        console.error('Unexpected error in resolveRole:', err);
-        return metadataRole || 'student';
-      }
-    }
-
-    // Initial session check
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      try {
-        if (session) {
-          const userRole = await resolveRole(
-            session.user.id,
-            session.user.user_metadata?.role
-          );
-          localStorage.setItem('role', userRole);
-        } else {
-          localStorage.removeItem('role');
-        }
-      } catch (err) {
-        console.error('Error in initial session check handler:', err);
-      } finally {
-        setLoading(false);
-      }
-    }).catch(err => {
-      console.error('Failed to get session:', err);
-      setLoading(false);
-    });
-
-    // Listen to changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      try {
-        if (session) {
-          const userRole = await resolveRole(
-            session.user.id,
-            session.user.user_metadata?.role
-          );
-          localStorage.setItem('role', userRole);
-        } else {
-          localStorage.removeItem('role');
-        }
-      } catch (err) {
-        console.error('Error in auth state change handler:', err);
-      } finally {
-        setLoading(false);
-      }
-    });
-
-    return () => {
-      if (subscription) subscription.unsubscribe();
-    };
-  }, []);
+function AppContent() {
+  const { loading } = useAuth();
 
   if (loading) {
     return (
@@ -166,5 +109,13 @@ export default function App() {
         <Route path="*" element={<FallbackRedirect />} />
       </Routes>
     </Router>
+  );
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }

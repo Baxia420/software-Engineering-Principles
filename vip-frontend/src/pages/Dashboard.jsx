@@ -3,62 +3,34 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import SideNavBar from '../components/SideNavBar';
 import TopNavBar from '../components/TopNavBar';
+import { useAuth } from '../AuthContext';
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const [profile, setProfile] = useState(null);
+  const { user, profile, loading: authLoading } = useAuth();
   const [stats, setStats] = useState({ sent: 0, pending: 0, approved: 0 });
   const [recentApplications, setRecentApplications] = useState([]);
   const [recentThreads, setRecentThreads] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (authLoading) return;
+    if (!user) {
+      navigate('/auth');
+      return;
+    }
+    if (profile && !profile.bio) {
+      navigate('/profile-setup');
+      return;
+    }
+
     async function loadDashboardData() {
-      console.log('Dashboard: loadDashboardData started');
       try {
-        console.log('Dashboard: [1/5] calling supabase.auth.getUser()');
-        const { data: userData, error: userError } = await supabase.auth.getUser();
-        console.log('Dashboard: [1/5] getUser response:', { userData, userError });
-
-        if (userError || !userData?.user) {
-          console.warn('No active session in Dashboard:', userError?.message);
-          localStorage.removeItem('role');
-          navigate('/auth');
-          return;
-        }
-
-        const user = userData.user;
-        console.log('Dashboard: user.id is:', user.id);
-
-        // 1. Load Profile
-        console.log('Dashboard: [2/5] fetching profile...');
-        const { data: profileData, error: profileError } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', user.id)
-          .single();
-        console.log('Dashboard: [2/5] profile fetch result:', { profileData, profileError });
-        
-        if (profileError) {
-          console.warn('Error fetching profile:', profileError.message);
-        }
-
-        if (profileData) {
-          setProfile(profileData);
-          if (!profileData.bio) {
-            console.log('Dashboard: bio is missing, navigating to /profile-setup');
-            navigate('/profile-setup');
-            return;
-          }
-        }
-
-        // 2. Load Stats
-        console.log('Dashboard: [3/5] fetching application stats...');
-        const { data: apps, error: appsError } = await supabase
+        // 1. Load Stats
+        const { data: apps } = await supabase
           .from('applications')
           .select('status')
           .eq('student_id', user.id);
-        console.log('Dashboard: [3/5] apps stats result:', { apps, appsError });
         
         if (apps) {
           const sent = apps.length;
@@ -67,9 +39,8 @@ export default function Dashboard() {
           setStats({ sent, pending, approved });
         }
 
-        // 3. Load Recent Applications
-        console.log('Dashboard: [4/5] fetching recent applications...');
-        const { data: recentApps, error: recentAppsError } = await supabase
+        // 2. Load Recent Applications
+        const { data: recentApps } = await supabase
           .from('applications')
           .select(`
             id,
@@ -84,15 +55,12 @@ export default function Dashboard() {
           .eq('student_id', user.id)
           .order('created_at', { ascending: false })
           .limit(4);
-        console.log('Dashboard: [4/5] recent applications result:', { recentApps, recentAppsError });
-
         if (recentApps) {
           setRecentApplications(recentApps);
         }
 
-        // 4. Load Recent Discussions
-        console.log('Dashboard: [5/5] fetching recent discussions...');
-        const { data: threads, error: threadsError } = await supabase
+        // 3. Load Recent Discussions
+        const { data: threads } = await supabase
           .from('forum_threads')
           .select(`
             id,
@@ -105,8 +73,6 @@ export default function Dashboard() {
           `)
           .order('created_at', { ascending: false })
           .limit(3);
-        console.log('Dashboard: [5/5] recent discussions result:', { threads, threadsError });
-
         if (threads) {
           setRecentThreads(threads);
         }
@@ -114,14 +80,13 @@ export default function Dashboard() {
       } catch (err) {
         console.error('Error loading dashboard data:', err);
       } finally {
-        console.log('Dashboard: loadDashboardData finally block executing');
         setLoading(false);
       }
     }
     loadDashboardData();
-  }, [navigate]);
+  }, [user, profile, authLoading, navigate]);
 
-  if (loading) {
+  if (authLoading || loading) {
     return (
       <div className="flex h-screen items-center justify-center bg-surface-dim">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>

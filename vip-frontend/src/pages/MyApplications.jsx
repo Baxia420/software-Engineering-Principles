@@ -4,9 +4,11 @@ import { supabase } from '../supabaseClient';
 import SideNavBar from '../components/SideNavBar';
 import TopNavBar from '../components/TopNavBar';
 import InternshipCard from '../components/InternshipCard';
+import { useAuth } from '../AuthContext';
 
 export default function MyApplications() {
   const navigate = useNavigate();
+  const { user, loading: authLoading } = useAuth();
   const [filterStatus, setFilterStatus] = useState('');
   const [search, setSearch] = useState('');
   const [applications, setApplications] = useState([]);
@@ -16,8 +18,8 @@ export default function MyApplications() {
   const [sendingReply, setSendingReply] = useState(false);
 
   async function loadApplications() {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (user) {
+    if (!user) return;
+    try {
       const { data, error } = await supabase
         .from('applications')
         .select(`
@@ -40,6 +42,8 @@ export default function MyApplications() {
         .eq('student_id', user.id)
         .order('created_at', { ascending: false });
 
+      if (error) throw error;
+
       if (data) {
         // Sort messages chronologically for each application
         const processed = data.map(app => {
@@ -59,13 +63,21 @@ export default function MyApplications() {
           return updated || null;
         });
       }
+    } catch (err) {
+      console.error('Error loading applications:', err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   useEffect(() => {
+    if (authLoading) return;
+    if (!user) {
+      navigate('/auth');
+      return;
+    }
     loadApplications();
-  }, []);
+  }, [user, authLoading, navigate]);
 
   const handleSendReply = async (e) => {
     e.preventDefault();

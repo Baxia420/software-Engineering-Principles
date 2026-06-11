@@ -1,39 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { supabase } from '../supabaseClient';
+import React from 'react';
+import { useAuth } from '../AuthContext';
 
 export default function TopNavBar({ breadcrumbs = [] }) {
-  const [avatarUrl, setAvatarUrl] = useState('');
-  const [initials, setInitials] = useState('U');
-
-  useEffect(() => {
-    async function loadAvatar() {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        const { data } = await supabase
-          .from('profiles')
-          .select('avatar_url, first_name, last_name, company_name, role')
-          .eq('id', user.id)
-          .single();
-        if (data) {
-          if (data.avatar_url) {
-            setAvatarUrl(data.avatar_url);
-          } else {
-            const letter = data.role === 'company' 
-              ? data.company_name?.charAt(0) 
-              : `${data.first_name?.charAt(0) || ''}${data.last_name?.charAt(0) || ''}`;
-            setInitials(letter?.toUpperCase() || 'U');
-          }
-        } else {
-          const meta = user.user_metadata || {};
-          const letter = meta.role === 'company'
-            ? meta.company_name?.charAt(0)
-            : `${meta.first_name?.charAt(0) || ''}${meta.last_name?.charAt(0) || ''}`;
-          setInitials(letter?.toUpperCase() || 'U');
-        }
-      }
-    }
-    loadAvatar();
-  }, []);
+  const { profile } = useAuth();
+  
+  const avatarUrl = profile?.avatar_url || '';
+  const letter = profile?.role === 'company' 
+    ? profile.company_name?.charAt(0) 
+    : `${profile?.first_name?.charAt(0) || ''}${profile?.last_name?.charAt(0) || ''}`;
+  const initials = letter?.toUpperCase() || 'U';
 
   return (
     <header className="bg-surface border-b border-outline-variant flex justify-between items-center w-full px-base md:px-margin-desktop h-16 z-30 sticky top-0">

@@ -3,11 +3,13 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import SideNavBar from '../components/SideNavBar';
 import TopNavBar from '../components/TopNavBar';
+import { useAuth } from '../AuthContext';
 
 export default function ApplicationForm() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const internshipId = searchParams.get('id');
+  const { user, profile, loading: authLoading } = useAuth();
 
   const [listing, setListing] = useState(null);
   const [coverLetter, setCoverLetter] = useState('');
@@ -15,47 +17,51 @@ export default function ApplicationForm() {
   const [resumeName, setResumeName] = useState('');
   const [uploading, setUploading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [userId, setUserId] = useState('');
 
   useEffect(() => {
-    async function loadData() {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        setUserId(user.id);
-        
-        // Fetch student's existing profile resume url if available
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('skills, resume_url, resume_name')
-          .eq('id', user.id)
-          .single();
-        if (profile && profile.resume_url) {
-          setResumeUrl(profile.resume_url);
-          setResumeName(profile.resume_name || 'Resume from Profile.pdf');
-        }
-      }
+    if (authLoading) return;
+    if (!user) {
+      navigate('/auth');
+      return;
+    }
 
+    if (profile && profile.resume_url) {
+      setResumeUrl(profile.resume_url);
+      setResumeName(profile.resume_name || 'Resume from Profile.pdf');
+    }
+
+    async function loadListing() {
       if (internshipId) {
-        const { data } = await supabase
-          .from('internships')
-          .select('*')
-          .eq('id', internshipId)
-          .single();
-        if (data) {
-          setListing(data);
+        try {
+          const { data, error } = await supabase
+            .from('internships')
+            .select('*')
+            .eq('id', internshipId)
+            .single();
+          if (error) throw error;
+          if (data) {
+            setListing(data);
+          }
+        } catch (err) {
+          console.error('Error loading internship details:', err);
         }
       }
     }
-    loadData();
-  }, [internshipId]);
+    loadListing();
+  }, [internshipId, user, profile, authLoading, navigate]);
 
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
+    if (!user) {
+      alert('Your session has expired. Please log in again.');
+      navigate('/auth');
+      return;
+    }
     try {
       setUploading(true);
       const fileExt = file.name.split('.').pop();
-      const fileName = `${userId}-${Date.now()}.${fileExt}`;
+      const fileName = `${user.id}-${Date.now()}.${fileExt}`;
       const filePath = `${fileName}`;
 
       const { error: uploadError } = await supabase.storage
@@ -79,28 +85,36 @@ export default function ApplicationForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!user) {
+      alert('Your session has expired. Please log in again.');
+      navigate('/auth');
+      return;
+    }
     if (!resumeUrl) {
       alert('Please upload your CV/Resume first.');
       return;
     }
     setSubmitting(true);
 
-    const { error } = await supabase
-      .from('applications')
-      .insert({
-        internship_id: internshipId,
-        student_id: userId,
-        status: 'pending',
-        cover_letter: coverLetter,
-        resume_url: resumeUrl
-      });
+    try {
+      const { error } = await supabase
+        .from('applications')
+        .insert({
+          internship_id: internshipId,
+          student_id: user.id,
+          status: 'pending',
+          cover_letter: coverLetter,
+          resume_url: resumeUrl
+        });
 
-    setSubmitting(false);
-    if (error) {
-      alert(error.message);
-    } else {
+      if (error) throw error;
+      
       alert('Application submitted successfully!');
       navigate('/my-applications');
+    } catch (err) {
+      alert(err.message || 'Failed to submit application.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
