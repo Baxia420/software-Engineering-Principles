@@ -64,9 +64,9 @@ export default function ApplicationForm() {
       const fileName = `${user.id}-${Date.now()}.${fileExt}`;
       const filePath = `${fileName}`;
 
-      // 8-second timeout promise
+      // 15-second timeout promise
       const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Upload timed out. Please verify that the "resumes" storage bucket exists and is set to "Public" in your Supabase dashboard.')), 8000)
+        setTimeout(() => reject(new Error('Upload timed out. Please check your internet connection, try a smaller file, or verify that the "resumes" storage bucket exists and is set to "Public" in your Supabase dashboard.')), 15000)
       );
 
       const uploadPromise = supabase.storage
