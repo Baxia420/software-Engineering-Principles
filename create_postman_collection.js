@@ -1,0 +1,261 @@
+const fs = require('fs');
+
+const collection = {
+  info: {
+    name: "VIP Portal API Tests (18 Critical Lifecycle Endpoints)",
+    description: "Automated test suite covering Authentication, Internship CRUD, Application Submission, Status Management, and Admin Verification.",
+    schema: "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  variable: [
+    { key: "base_url", value: "https://eradgzlaigmwiumioyaq.supabase.co", type: "string" },
+    { key: "anon_key", value: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVyYWRnemxhaWdtd2l1bWlveWFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0ODMxNDUsImV4cCI6MjA5MzA1OTE0NX0.ZccCK1kQs4cWs4nfwIp9jDuNJyWBWB6rlzm6kCNHRuU", type: "string" },
+    { key: "student_email", value: "teststudent_" + Date.now() + "@utm.my", type: "string" },
+    { key: "company_email", value: "testcompany_" + Date.now() + "@shell.com", type: "string" },
+    { key: "supervisor_email", value: "testsupervisor_" + Date.now() + "@utm.my", type: "string" },
+    { key: "password", value: "SecureTestPass123!", type: "string" },
+    { key: "student_token", value: "", type: "string" },
+    { key: "company_token", value: "", type: "string" },
+    { key: "supervisor_token", value: "", type: "string" },
+    { key: "student_id", value: "", type: "string" },
+    { key: "company_id", value: "", type: "string" },
+    { key: "internship_id", value: "", type: "string" },
+    { key: "application_id", value: "", type: "string" }
+  ],
+  item: [
+    {
+      name: "1. Auth",
+      item: [
+        {
+          name: "1. Signup Student",
+          event: [
+            { listen: "test", script: { exec: [
+              "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+              "var jsonData = pm.response.json();",
+              "pm.collectionVariables.set('student_id', jsonData.user.id);",
+              "pm.collectionVariables.set('student_token', jsonData.access_token);"
+            ], type: "text/javascript" } }
+          ],
+          request: {
+            method: "POST",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Content-Type", value: "application/json" } ],
+            url: { raw: "{{base_url}}/auth/v1/signup", host: ["{{base_url}}"], path: ["auth", "v1", "signup"] },
+            body: { mode: "raw", raw: JSON.stringify({ email: "{{student_email}}", password: "{{password}}", data: { role: "student", first_name: "Test", last_name: "Student" } }) }
+          }
+        },
+        {
+          name: "2. Signup Company",
+          event: [
+            { listen: "test", script: { exec: [
+              "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+              "var jsonData = pm.response.json();",
+              "pm.collectionVariables.set('company_id', jsonData.user.id);",
+              "pm.collectionVariables.set('company_token', jsonData.access_token);"
+            ], type: "text/javascript" } }
+          ],
+          request: {
+            method: "POST",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Content-Type", value: "application/json" } ],
+            url: { raw: "{{base_url}}/auth/v1/signup", host: ["{{base_url}}"], path: ["auth", "v1", "signup"] },
+            body: { mode: "raw", raw: JSON.stringify({ email: "{{company_email}}", password: "{{password}}", data: { role: "company", company_name: "Test Shell PLC" } }) }
+          }
+        },
+        {
+          name: "3. Signup Supervisor",
+          event: [
+            { listen: "test", script: { exec: [
+              "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+              "var jsonData = pm.response.json();",
+              "pm.collectionVariables.set('supervisor_token', jsonData.access_token);"
+            ], type: "text/javascript" } }
+          ],
+          request: {
+            method: "POST",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Content-Type", value: "application/json" } ],
+            url: { raw: "{{base_url}}/auth/v1/signup", host: ["{{base_url}}"], path: ["auth", "v1", "signup"] },
+            body: { mode: "raw", raw: JSON.stringify({ email: "{{supervisor_email}}", password: "{{password}}", data: { role: "supervisor", department: "Computer Science" } }) }
+          }
+        },
+        {
+          name: "4. Login Student",
+          event: [ { listen: "test", script: { exec: [ "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });" ], type: "text/javascript" } } ],
+          request: {
+            method: "POST",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Content-Type", value: "application/json" } ],
+            url: { raw: "{{base_url}}/auth/v1/token?grant_type=password", host: ["{{base_url}}"], path: ["auth", "v1", "token"], query: [{key: "grant_type", value: "password"}] },
+            body: { mode: "raw", raw: JSON.stringify({ email: "{{student_email}}", password: "{{password}}" }) }
+          }
+        },
+        {
+          name: "5. Login Company",
+          event: [ { listen: "test", script: { exec: [ "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });" ], type: "text/javascript" } } ],
+          request: {
+            method: "POST",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Content-Type", value: "application/json" } ],
+            url: { raw: "{{base_url}}/auth/v1/token?grant_type=password", host: ["{{base_url}}"], path: ["auth", "v1", "token"], query: [{key: "grant_type", value: "password"}] },
+            body: { mode: "raw", raw: JSON.stringify({ email: "{{company_email}}", password: "{{password}}" }) }
+          }
+        },
+        {
+          name: "6. Login Supervisor",
+          event: [ { listen: "test", script: { exec: [ "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });" ], type: "text/javascript" } } ],
+          request: {
+            method: "POST",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Content-Type", value: "application/json" } ],
+            url: { raw: "{{base_url}}/auth/v1/token?grant_type=password", host: ["{{base_url}}"], path: ["auth", "v1", "token"], query: [{key: "grant_type", value: "password"}] },
+            body: { mode: "raw", raw: JSON.stringify({ email: "{{supervisor_email}}", password: "{{password}}" }) }
+          }
+        }
+      ]
+    },
+    {
+      name: "2. Admin Verification",
+      item: [
+        {
+          name: "7. Supervisor verifies Company Profile",
+          event: [ { listen: "test", script: { exec: [ "pm.test('Status is 204 No Content', function () { pm.response.to.have.status(204); });" ], type: "text/javascript" } } ],
+          request: {
+            method: "PATCH",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Authorization", value: "Bearer {{supervisor_token}}" }, { key: "Content-Type", value: "application/json" } ],
+            url: { raw: "{{base_url}}/rest/v1/profiles?id=eq.{{company_id}}", host: ["{{base_url}}"], path: ["rest", "v1", "profiles"], query: [{key: "id", value: "eq.{{company_id}}"}] },
+            body: { mode: "raw", raw: JSON.stringify({ is_approved: true }) }
+          }
+        }
+      ]
+    },
+    {
+      name: "3. Internship CRUD",
+      item: [
+        {
+          name: "8. Company creates Internship",
+          event: [
+            { listen: "test", script: { exec: [
+              "pm.test('Status code is 201 Created', function () { pm.response.to.have.status(201); });",
+              "var jsonData = pm.response.json();",
+              "pm.collectionVariables.set('internship_id', jsonData[0].id);"
+            ], type: "text/javascript" } }
+          ],
+          request: {
+            method: "POST",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Authorization", value: "Bearer {{company_token}}" }, { key: "Content-Type", value: "application/json" }, { key: "Prefer", value: "return=representation" } ],
+            url: { raw: "{{base_url}}/rest/v1/internships", host: ["{{base_url}}"], path: ["rest", "v1", "internships"] },
+            body: { mode: "raw", raw: JSON.stringify({ supervisor_id: "{{company_id}}", title: "Test Internship API", company: "Test Shell PLC", location: "Remote", type: "remote", description: "Test API Intern", requirements: "React", stipend: "1000", duration: "12 Weeks" }) }
+          }
+        },
+        {
+          name: "9. Read Internships",
+          event: [ { listen: "test", script: { exec: [ "pm.test('Status is 200', function () { pm.response.to.have.status(200); });" ], type: "text/javascript" } } ],
+          request: {
+            method: "GET",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Authorization", value: "Bearer {{student_token}}" } ],
+            url: { raw: "{{base_url}}/rest/v1/internships?select=*", host: ["{{base_url}}"], path: ["rest", "v1", "internships"], query: [{key: "select", value: "*"}] }
+          }
+        },
+        {
+          name: "10. Company updates Internship",
+          event: [ { listen: "test", script: { exec: [ "pm.test('Status is 204 No Content or 200', function () { pm.response.to.be.success; });" ], type: "text/javascript" } } ],
+          request: {
+            method: "PATCH",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Authorization", value: "Bearer {{company_token}}" }, { key: "Content-Type", value: "application/json" } ],
+            url: { raw: "{{base_url}}/rest/v1/internships?id=eq.{{internship_id}}", host: ["{{base_url}}"], path: ["rest", "v1", "internships"], query: [{key: "id", value: "eq.{{internship_id}}"}] },
+            body: { mode: "raw", raw: JSON.stringify({ stipend: "1500" }) }
+          }
+        }
+      ]
+    },
+    {
+      name: "4. Application Submission",
+      item: [
+        {
+          name: "11. Student Applies to Internship",
+          event: [
+            { listen: "test", script: { exec: [
+              "pm.test('Status code is 201 Created', function () { pm.response.to.have.status(201); });",
+              "var jsonData = pm.response.json();",
+              "pm.collectionVariables.set('application_id', jsonData[0].id);"
+            ], type: "text/javascript" } }
+          ],
+          request: {
+            method: "POST",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Authorization", value: "Bearer {{student_token}}" }, { key: "Content-Type", value: "application/json" }, { key: "Prefer", value: "return=representation" } ],
+            url: { raw: "{{base_url}}/rest/v1/applications", host: ["{{base_url}}"], path: ["rest", "v1", "applications"] },
+            body: { mode: "raw", raw: JSON.stringify({ student_id: "{{student_id}}", internship_id: "{{internship_id}}", status: "pending", student_message: "Hello API", contact_email: "{{student_email}}" }) }
+          }
+        },
+        {
+          name: "12. Student reads own Application",
+          event: [ { listen: "test", script: { exec: [ "pm.test('Status is 200', function () { pm.response.to.have.status(200); });" ], type: "text/javascript" } } ],
+          request: {
+            method: "GET",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Authorization", value: "Bearer {{student_token}}" } ],
+            url: { raw: "{{base_url}}/rest/v1/applications?student_id=eq.{{student_id}}", host: ["{{base_url}}"], path: ["rest", "v1", "applications"], query: [{key: "student_id", value: "eq.{{student_id}}"}] }
+          }
+        },
+        {
+          name: "13. Company reads Applications to their internship",
+          event: [ { listen: "test", script: { exec: [ "pm.test('Status is 200', function () { pm.response.to.have.status(200); });" ], type: "text/javascript" } } ],
+          request: {
+            method: "GET",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Authorization", value: "Bearer {{company_token}}" } ],
+            url: { raw: "{{base_url}}/rest/v1/applications?internship_id=eq.{{internship_id}}", host: ["{{base_url}}"], path: ["rest", "v1", "applications"], query: [{key: "internship_id", value: "eq.{{internship_id}}"}] }
+          }
+        }
+      ]
+    },
+    {
+      name: "5. Status Management & Admin",
+      item: [
+        {
+          name: "14. Company updates status to Reviewed",
+          event: [ { listen: "test", script: { exec: [ "pm.test('Status is 204 or 200', function () { pm.response.to.be.success; });" ], type: "text/javascript" } } ],
+          request: {
+            method: "PATCH",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Authorization", value: "Bearer {{company_token}}" }, { key: "Content-Type", value: "application/json" } ],
+            url: { raw: "{{base_url}}/rest/v1/applications?id=eq.{{application_id}}", host: ["{{base_url}}"], path: ["rest", "v1", "applications"], query: [{key: "id", value: "eq.{{application_id}}"}] },
+            body: { mode: "raw", raw: JSON.stringify({ status: "reviewed" }) }
+          }
+        },
+        {
+          name: "15. Company updates status to Accepted",
+          event: [ { listen: "test", script: { exec: [ "pm.test('Status is 204 or 200', function () { pm.response.to.be.success; });" ], type: "text/javascript" } } ],
+          request: {
+            method: "PATCH",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Authorization", value: "Bearer {{company_token}}" }, { key: "Content-Type", value: "application/json" } ],
+            url: { raw: "{{base_url}}/rest/v1/applications?id=eq.{{application_id}}", host: ["{{base_url}}"], path: ["rest", "v1", "applications"], query: [{key: "id", value: "eq.{{application_id}}"}] },
+            body: { mode: "raw", raw: JSON.stringify({ status: "accepted" }) }
+          }
+        },
+        {
+          name: "16. Supervisor reads all applications",
+          event: [ { listen: "test", script: { exec: [ "pm.test('Status is 200', function () { pm.response.to.have.status(200); });" ], type: "text/javascript" } } ],
+          request: {
+            method: "GET",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Authorization", value: "Bearer {{supervisor_token}}" } ],
+            url: { raw: "{{base_url}}/rest/v1/applications", host: ["{{base_url}}"], path: ["rest", "v1", "applications"] }
+          }
+        },
+        {
+          name: "17. Supervisor approves placement (status to approved)",
+          event: [ { listen: "test", script: { exec: [ "pm.test('Status is 204 or 200', function () { pm.response.to.be.success; });" ], type: "text/javascript" } } ],
+          request: {
+            method: "PATCH",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Authorization", value: "Bearer {{supervisor_token}}" }, { key: "Content-Type", value: "application/json" } ],
+            url: { raw: "{{base_url}}/rest/v1/applications?id=eq.{{application_id}}", host: ["{{base_url}}"], path: ["rest", "v1", "applications"], query: [{key: "id", value: "eq.{{application_id}}"}] },
+            body: { mode: "raw", raw: JSON.stringify({ status: "approved" }) }
+          }
+        },
+        {
+          name: "18. Company deletes Internship (Cleanup)",
+          event: [ { listen: "test", script: { exec: [ "pm.test('Status is 204 or 200', function () { pm.response.to.be.success; });" ], type: "text/javascript" } } ],
+          request: {
+            method: "DELETE",
+            header: [ { key: "apikey", value: "{{anon_key}}" }, { key: "Authorization", value: "Bearer {{company_token}}" } ],
+            url: { raw: "{{base_url}}/rest/v1/internships?id=eq.{{internship_id}}", host: ["{{base_url}}"], path: ["rest", "v1", "internships"], query: [{key: "id", value: "eq.{{internship_id}}"}] }
+          }
+        }
+      ]
+    }
+  ]
+};
+
+fs.writeFileSync('VIP_Portal_API_Tests.postman_collection.json', JSON.stringify(collection, null, 2));
+console.log('Postman collection created: VIP_Portal_API_Tests.postman_collection.json');
