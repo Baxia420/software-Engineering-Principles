@@ -28,11 +28,6 @@ export default function Authentication() {
       const emailInput = document.getElementById('login-email').value;
       const passwordInput = document.getElementById('login-password').value;
 
-      if (emailInput !== 'alam.j@graduate.utm.my') {
-        alert('Sorry login is currently disabled, Please Contact Jobayer for more information');
-        return;
-      }
-
       const { data, error } = await supabase.auth.signInWithPassword({
         email: emailInput,
         password: passwordInput,
