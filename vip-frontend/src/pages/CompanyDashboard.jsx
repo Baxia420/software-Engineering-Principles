@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
+import { Briefcase, Users, Clock, AlertTriangle, FileWarning } from 'lucide-react';
 import SideNavBar from '../components/SideNavBar';
 import TopNavBar from '../components/TopNavBar';
+import StatusBadge from '../components/ui/StatusBadge';
+import Button from '../components/ui/Button';
+import EmptyState from '../components/ui/EmptyState';
+import PageTransition from '../components/ui/PageTransition';
+import PageHeader from '../components/ui/PageHeader';
 
 export default function CompanyDashboard() {
   const navigate = useNavigate();
@@ -105,19 +111,19 @@ export default function CompanyDashboard() {
       <main className="flex-1 ml-0 md:ml-64 overflow-y-auto w-full flex flex-col bg-background">
         <TopNavBar breadcrumbs={[{ label: 'Home' }, { label: 'Company Dashboard' }]} />
 
-        <div className="p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto w-full flex flex-col gap-gutter mt-4 mb-8">
-          
+        <PageTransition className="p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto w-full flex flex-col gap-gutter mt-4 mb-8">
+
           {/* Welcome Header */}
-          <div className="mb-2">
-            <h1 className="font-h1 text-h1 text-on-surface mb-2 font-bold font-h1 serif">Welcome, {welcomeName}</h1>
-            <p className="font-body-lg text-body-lg text-on-surface-variant">Manage your corporate recruitment dashboard.</p>
-          </div>
+          <PageHeader
+            title={`Welcome, ${welcomeName}`}
+            subtitle="Manage your corporate recruitment dashboard."
+          />
 
           {/* Pending Approval Banner */}
           {!isApproved && (
             profile?.rejection_reason ? (
-              <div className="bg-error-container/15 border-l-4 border-error text-[#ba1a1a] p-4 rounded-lg flex items-start gap-3 shadow-sm mb-4">
-                <span className="material-symbols-outlined text-[24px] text-error">report</span>
+              <div className="bg-error-container/15 border-l-4 border-error text-error p-4 rounded-lg flex items-start gap-3 shadow-soft mb-4">
+                <FileWarning size={24} className="text-error shrink-0" />
                 <div>
                   <p className="font-label-md text-label-md font-bold">Correction Required</p>
                   <p className="font-body-sm text-body-sm mt-0.5">
@@ -132,8 +138,8 @@ export default function CompanyDashboard() {
                 </div>
               </div>
             ) : (
-              <div className="bg-[#fff3cd] border-l-4 border-[#ffc107] text-[#856404] p-4 rounded-lg flex items-start gap-3 shadow-sm mb-4">
-                <span className="material-symbols-outlined text-[24px]">warning</span>
+              <div className="bg-secondary-container/20 border-l-4 border-secondary-container text-on-secondary-container p-4 rounded-lg flex items-start gap-3 shadow-soft mb-4">
+                <AlertTriangle size={24} className="text-secondary shrink-0" />
                 <div>
                   <p className="font-label-md text-label-md font-bold">Verification Pending</p>
                   <p className="font-body-sm text-body-sm mt-0.5">Your organization's account is currently awaiting admin approval. You will be able to post internships and review candidates once verified.</p>
@@ -145,42 +151,42 @@ export default function CompanyDashboard() {
           {/* Stats Row */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
             {/* Posted Positions */}
-            <div className="bg-surface-container-lowest border border-outline-variant rounded-xl p-gutter border-l-4 border-l-[#C4860A] flex flex-col justify-between shadow-sm">
+            <div className="bg-surface-container-lowest border border-outline-variant rounded-xl p-gutter border-l-4 border-l-secondary-container flex flex-col justify-between shadow-sm">
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Posted Internships</p>
                   <h2 className="font-h2 text-h2 text-on-surface font-bold">{stats.postings}</h2>
                 </div>
                 <div className="p-2 bg-surface-container rounded-lg text-primary">
-                  <span className="material-symbols-outlined">work</span>
+                  <Briefcase size={22} strokeWidth={1.75} />
                 </div>
               </div>
               <p className="font-body-sm text-body-sm text-on-surface-variant">Active internship positions</p>
             </div>
 
             {/* Total Applicants */}
-            <div className="bg-surface-container-lowest border border-outline-variant rounded-xl p-gutter border-l-4 border-l-[#C4860A] flex flex-col justify-between shadow-sm">
+            <div className="bg-surface-container-lowest border border-outline-variant rounded-xl p-gutter border-l-4 border-l-secondary-container flex flex-col justify-between shadow-sm">
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Total Applicants</p>
                   <h2 className="font-h2 text-h2 text-on-surface font-bold">{stats.applicants}</h2>
                 </div>
                 <div className="p-2 bg-secondary-container/20 rounded-lg text-secondary">
-                  <span className="material-symbols-outlined">group</span>
+                  <Users size={22} strokeWidth={1.75} />
                 </div>
               </div>
               <p className="font-body-sm text-body-sm text-on-surface-variant">Students applied to listings</p>
             </div>
 
             {/* Pending Reviews */}
-            <div className="bg-surface-container-lowest border border-outline-variant rounded-xl p-gutter border-l-4 border-l-[#C4860A] flex flex-col justify-between shadow-sm">
+            <div className="bg-surface-container-lowest border border-outline-variant rounded-xl p-gutter border-l-4 border-l-secondary-container flex flex-col justify-between shadow-sm">
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Pending Review</p>
                   <h2 className="font-h2 text-h2 text-on-surface font-bold">{stats.pending}</h2>
                 </div>
                 <div className="p-2 bg-error-container/50 rounded-lg text-error">
-                  <span className="material-symbols-outlined">pending_actions</span>
+                  <Clock size={22} strokeWidth={1.75} />
                 </div>
               </div>
               <p className="font-body-sm text-body-sm text-on-surface-variant">Requires recruitment attention</p>
@@ -230,34 +236,30 @@ export default function CompanyDashboard() {
                               {app.internships?.title}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap font-body-sm text-body-sm text-on-surface capitalize">
-                              <span className={`px-2 py-1 rounded font-semibold text-xs uppercase ${
-                                app.status === 'approved' 
-                                  ? 'bg-green-600/10 text-green-700' 
-                                  : app.status === 'rejected' 
-                                  ? 'bg-error-container/15 text-error' 
-                                  : 'bg-surface-variant text-on-surface'
-                              }`}>
-                                {app.status}
-                              </span>
+                              <StatusBadge status={app.status} />
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap font-body-sm text-body-sm text-on-surface">
                               {new Date(app.created_at).toLocaleDateString()}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-right">
-                              <button 
+                              <Button
+                                size="sm"
                                 onClick={() => navigate(`/company/review?id=${app.id}`)}
-                                className="px-4 py-1.5 bg-primary text-on-primary font-label-sm text-label-sm rounded hover:opacity-90 transition-opacity cursor-pointer border-none"
                               >
                                 Review Candidate
-                              </button>
+                              </Button>
                             </td>
                           </tr>
                         );
                       })
                     ) : (
                       <tr>
-                        <td colSpan="5" className="px-6 py-8 text-center text-on-surface-variant font-body-sm bg-surface-container-lowest">
-                          No applicants found for your positions yet.
+                        <td colSpan="5" className="p-0 bg-surface-container-lowest">
+                          <EmptyState
+                            icon={Users}
+                            title="No applicants yet"
+                            description="When students apply to your internship postings, they will appear here for review."
+                          />
                         </td>
                       </tr>
                     )}
@@ -266,7 +268,7 @@ export default function CompanyDashboard() {
               </div>
             </div>
           )}
-        </div>
+        </PageTransition>
       </main>
     </div>
   );

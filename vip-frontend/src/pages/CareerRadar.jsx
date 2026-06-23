@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import SideNavBar from '../components/SideNavBar';
 import TopNavBar from '../components/TopNavBar';
+import PageHeader from '../components/ui/PageHeader';
 
 export default function CareerRadar() {
   const navigate = useNavigate();
@@ -17,10 +18,10 @@ export default function CareerRadar() {
 
         <div className="p-margin-mobile md:p-margin-desktop max-w-[1280px] mx-auto w-full flex flex-col gap-gutter mt-4 mb-8">
           {/* Page Header */}
-          <div className="mb-4">
-            <h1 className="font-h1 text-h1 text-primary mb-2 font-bold font-h1 serif">Career Radar &amp; Market Trends</h1>
-            <p className="font-body-md text-body-md text-on-surface-variant">Parsing active UTM listings and industry demands.</p>
-          </div>
+          <PageHeader
+            title="Career Radar & Market Trends"
+            subtitle="Parsing active UTM listings and industry demands."
+          />
 
           {/* Bento Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-gutter auto-rows-min">
@@ -86,7 +87,7 @@ export default function CareerRadar() {
 
             {/* 3. CGPA Benchmarks Card */}
             <div className="col-span-1 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col justify-center items-center text-center shadow-sm min-h-[220px]">
-              <span className="material-symbols-outlined text-[#C4860A] text-[40px] mb-4">school</span>
+              <span className="material-symbols-outlined text-secondary text-[40px] mb-4">school</span>
               <h2 className="font-h1 text-h1 text-primary mb-2 font-bold font-h1 serif">3.50</h2>
               <p className="font-body-md text-body-md text-on-surface font-medium mb-4">Average Required CGPA<br />for Tier-1 Placements</p>
               <div className="bg-surface-container px-4 py-2 rounded-lg border border-outline-variant inline-block">

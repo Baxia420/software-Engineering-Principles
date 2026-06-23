@@ -189,8 +189,8 @@ export default function ForumThread() {
 
               {/* Comment Thread */}
               <div className="flex flex-col gap-6 mb-8">
-                {replies.map((reply, idx) => {
-                  const replierName = reply.profiles 
+                {replies.map((reply) => {
+                  const replierName = reply.profiles
                     ? `${reply.profiles.first_name} ${reply.profiles.last_name}` 
                     : 'Anonymous';
                   const replierInitials = reply.profiles 
@@ -198,7 +198,7 @@ export default function ForumThread() {
                     : 'A';
 
                   return (
-                    <div key={idx} className="flex gap-4">
+                    <div key={reply.id} className="flex gap-4">
                       <div className="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center text-primary font-bold shrink-0">
                         {replierInitials}
                       </div>

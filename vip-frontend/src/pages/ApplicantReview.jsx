@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import SideNavBar from '../components/SideNavBar';
 import TopNavBar from '../components/TopNavBar';
+import StatusBadge from '../components/ui/StatusBadge';
 
 export default function ApplicantReview() {
   const navigate = useNavigate();
@@ -175,15 +176,7 @@ export default function ApplicantReview() {
                           </span>
                         </div>
                       </div>
-                      <span className={`inline-block font-label-sm text-label-sm px-3 py-1.5 rounded-lg border uppercase tracking-wider font-semibold self-start md:self-center ${
-                        application.status === 'approved' 
-                          ? 'bg-green-600/10 border-green-600 text-green-700' 
-                          : application.status === 'rejected' 
-                          ? 'bg-error-container/15 border-error text-error' 
-                          : 'bg-surface-variant border-outline-variant text-on-surface'
-                      }`}>
-                        {application.status}
-                      </span>
+                      <StatusBadge status={application.status} className="self-start md:self-center px-3 py-1.5 text-label-sm" />
                     </div>
                   </div>
                 </div>
@@ -208,10 +201,10 @@ export default function ApplicantReview() {
                             className={`p-3 border rounded-lg max-w-xl shadow-sm ${
                               isStudent 
                                 ? 'bg-surface-variant border-outline-variant self-start' 
-                                : 'bg-[#6B1B1B]/5 border-[#6B1B1B]/15 self-end'
+                                : 'bg-primary-container/5 border-primary-container/15 self-end'
                             }`}
                           >
-                            <div className="font-label-sm text-label-sm uppercase tracking-wider mb-1 font-semibold text-[#6B1B1B]">
+                            <div className="font-label-sm text-label-sm uppercase tracking-wider mb-1 font-semibold text-primary-container">
                               {isStudent ? 'Applicant' : 'Recruiter'}
                             </div>
                             <p className="font-body-md text-body-md text-on-surface whitespace-pre-wrap">{msg.message}</p>

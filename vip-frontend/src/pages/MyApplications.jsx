@@ -3,8 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import SideNavBar from '../components/SideNavBar';
 import TopNavBar from '../components/TopNavBar';
+import { Search, ChevronDown, FileText } from 'lucide-react';
 import InternshipCard from '../components/InternshipCard';
 import { useAuth } from '../AuthContext';
+import StatusBadge from '../components/ui/StatusBadge';
+import EmptyState from '../components/ui/EmptyState';
+import PageTransition from '../components/ui/PageTransition';
+import PageHeader from '../components/ui/PageHeader';
+import { SkeletonList } from '../components/ui/Skeleton';
 
 export default function MyApplications() {
   const navigate = useNavigate();
@@ -125,20 +131,18 @@ export default function MyApplications() {
       <main className="flex-1 ml-0 md:ml-64 overflow-y-auto w-full flex flex-col bg-background">
         <TopNavBar breadcrumbs={[{ label: 'Home', link: '/dashboard' }, { label: 'My Applications' }]} />
         
-        <div className="p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto w-full flex flex-col gap-base mt-4 mb-8">
-          <header className="mb-6 border-b border-outline-variant pb-6">
-            <div>
-              <h2 className="font-h1 text-h1 text-primary mb-2">My Applications</h2>
-              <p className="font-body-lg text-body-lg text-on-surface-variant">Track and manage your academic internship progress.</p>
-            </div>
-          </header>
+        <PageTransition className="p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto w-full flex flex-col gap-base mt-4 mb-8">
+          <PageHeader
+            title="My Applications"
+            subtitle="Track and manage your academic internship progress."
+          />
 
           <div className="flex flex-col md:flex-row gap-4 mb-8">
             <div className="relative flex-1 max-w-md">
-              <span className="material-symbols-outlined absolute left-3 top-2.5 text-outline">search</span>
-              <input 
-                className="w-full pl-10 pr-4 py-2 border border-outline bg-surface-container-lowest text-on-surface rounded-DEFAULT focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md placeholder:text-on-surface-variant transition-colors" 
-                placeholder="Search by company or role..." 
+              <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none" />
+              <input
+                className="w-full pl-10 pr-4 py-2.5 border border-outline bg-surface-container-lowest text-on-surface rounded-DEFAULT focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/30 font-body-md text-body-md placeholder:text-on-surface-variant transition-all shadow-soft"
+                placeholder="Search by company or role..."
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -155,22 +159,21 @@ export default function MyApplications() {
                 <option value="approved">Approved</option>
                 <option value="rejected">Rejected</option>
               </select>
-              <span className="material-symbols-outlined absolute right-3 top-2.5 text-outline pointer-events-none">arrow_drop_down</span>
+              <ChevronDown size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none" />
             </div>
           </div>
 
           <div className="flex flex-col gap-3">
             {loading ? (
-              <div className="text-center py-8">
-                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary mx-auto"></div>
-              </div>
+              <SkeletonList count={4} />
             ) : filtered.length > 0 ? (
-              filtered.map(app => (
-                <InternshipCard 
+              filtered.map((app, i) => (
+                <InternshipCard
                   key={app.id}
+                  delay={i * 60}
                   title={app.internships?.title || 'Unknown Role'}
                   company={app.internships?.company || 'Unknown Company'}
-                  status={app.status === 'approved' ? 'Accepted' : app.status === 'rejected' ? 'Rejected' : 'Pending'}
+                  status={app.status}
                   appliedDate={new Date(app.created_at).toLocaleDateString()}
                   actionLabel="View Application"
                   messageCount={app.application_messages?.length || 0}
@@ -178,12 +181,18 @@ export default function MyApplications() {
                 />
               ))
             ) : (
-              <div className="text-center py-8 text-on-surface-variant font-body-md bg-surface-container-lowest border border-dashed border-outline-variant rounded-lg">
-                No applications submitted yet.
-              </div>
+              <EmptyState
+                icon={FileText}
+                title={search || filterStatus ? 'No matching applications' : 'No applications yet'}
+                description={
+                  search || filterStatus
+                    ? 'Try clearing your search or status filter.'
+                    : 'When you apply to internships, they will appear here so you can track their progress.'
+                }
+              />
             )}
           </div>
-        </div>
+        </PageTransition>
       </main>
 
       {/* Detailed Application Modal */}
@@ -222,15 +231,10 @@ export default function MyApplications() {
                     Application Status
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className={`inline-block px-3 py-1 rounded-lg border text-label-md font-label-md uppercase tracking-wider font-semibold ${
-                      selectedApp.status === 'approved' 
-                        ? 'bg-green-600/10 border-green-600 text-green-700' 
-                        : selectedApp.status === 'rejected' 
-                        ? 'bg-[#6B1B1B]/10 border-[#6B1B1B] text-[#6B1B1B]' 
-                        : 'bg-surface-variant border-outline-variant text-on-surface'
-                    }`}>
-                      {selectedApp.status === 'approved' ? 'Accepted / Shortlisted' : selectedApp.status}
-                    </span>
+                    <StatusBadge
+                      status={selectedApp.status}
+                      label={selectedApp.status === 'approved' ? 'Accepted / Shortlisted' : undefined}
+                    />
                   </div>
                 </div>
                 <div className="font-body-sm text-body-sm text-on-surface-variant">
@@ -254,13 +258,13 @@ export default function MyApplications() {
                           key={msg.id} 
                           className={`p-3 border rounded-lg max-w-[85%] relative shadow-sm ${
                             isSelf 
-                              ? 'bg-[#6B1B1B] border-[#6B1B1B] text-white self-end rounded-br-none' 
+                              ? 'bg-primary-container border-primary-container text-white self-end rounded-br-none' 
                               : 'bg-surface-container-low border-outline-variant text-on-surface self-start rounded-bl-none'
                           }`}
                         >
-                          {!isSelf && <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#6B1B1B] rounded-l-lg"></div>}
+                          {!isSelf && <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-container rounded-l-lg"></div>}
                           <div className={`font-label-sm text-[10px] uppercase tracking-wider mb-1 font-semibold ${
-                            isSelf ? 'text-white/80' : 'text-[#6B1B1B]'
+                            isSelf ? 'text-white/80' : 'text-primary-container'
                           }`}>
                             {isSelf ? 'You' : 'Recruiter'}
                           </div>
@@ -297,7 +301,7 @@ export default function MyApplications() {
                     <button 
                       type="submit" 
                       disabled={sendingReply || !replyText.trim()}
-                      className="bg-[#6B1B1B] text-white px-4 py-2 rounded font-label-md text-label-md hover:opacity-90 disabled:opacity-50 flex items-center gap-1.5 cursor-pointer border border-transparent"
+                      className="bg-primary-container text-white px-4 py-2 rounded font-label-md text-label-md hover:opacity-90 disabled:opacity-50 flex items-center gap-1.5 cursor-pointer border border-transparent"
                     >
                       {sendingReply ? 'Sending...' : 'Send'}
                       <span className="material-symbols-outlined text-[16px]">send</span>
@@ -357,7 +361,7 @@ export default function MyApplications() {
                       setSelectedApp(null);
                       navigate(`/internship-details?id=${selectedApp.internships?.id}`);
                     }}
-                    className="border border-[#6B1B1B] text-[#6B1B1B] rounded-lg p-3 flex items-center justify-between bg-transparent hover:bg-[#6B1B1B]/5 transition-all cursor-pointer w-full text-left font-label-md text-label-md"
+                    className="border border-primary-container text-primary-container rounded-lg p-3 flex items-center justify-between bg-transparent hover:bg-primary-container/5 transition-all cursor-pointer w-full text-left font-label-md text-label-md"
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
                       <span className="material-symbols-outlined text-[24px]">work</span>

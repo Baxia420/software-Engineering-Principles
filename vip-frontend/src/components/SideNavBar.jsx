@@ -31,8 +31,8 @@ export default function SideNavBar() {
   const isCompany = role === 'company';
   const isStudent = role === 'student';
 
-  const activeClass = "flex items-center gap-3 px-4 py-3 bg-surface-container-high border-l-4 border-secondary-container text-primary font-bold rounded-lg transition-all scale-98";
-  const inactiveClass = "flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container rounded-lg transition-all duration-200 scale-95 active:scale-100";
+  const activeClass = "flex items-center gap-3 px-4 py-3 bg-primary-container border-l-4 border-secondary-container text-white font-bold rounded-lg transition-all duration-200 shadow-soft";
+  const inactiveClass = "flex items-center gap-3 px-4 py-3 border-l-4 border-transparent text-primary-fixed/75 hover:bg-primary-container/60 hover:text-white hover:translate-x-0.5 rounded-lg transition-all duration-200 active:scale-[0.98]";
 
   const displayName = profile 
     ? (isCompany ? profile.company_name : `${profile.first_name} ${profile.last_name}`) 
@@ -49,14 +49,16 @@ export default function SideNavBar() {
   const navContent = (
     <>
       {/* Header */}
-      <div className="p-4 border-b border-outline-variant flex flex-col items-center text-center">
-        <img 
-          alt="UTM Logo" 
-          className="h-16 w-auto object-contain mb-4" 
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuALJ0IC37RsH7JLKd8P899TSVUiIgwwZC4a-pLfFURvinhF7kAG8ZaJRUFn-Lx9Q17AoYEojN3xJAxEUQhFSc22dRmF3lwjWYhRrpgLMNymQir2fQaUKZTGv0WfX2-5EuUpQT1xXf7cZeMfwQyLCwyaW2y9r718Cd5OomWK8OcXChiWF4uo9T-PFt_RZ-oV7S5_8tWOVC3xy2vBi29FGRbuQA6CJiGtrwVDrqcEByhOPIzMr6I1iSv0MTgii6g9CMJ22XZuYuxK6A"
-        />
-        <h1 className="text-xl font-black text-[#6B1B1B] uppercase font-h1 serif antialiased">VIP Portal</h1>
-        <p className="font-body-sm text-on-surface-variant text-sm mt-1">
+      <div className="p-4 border-b border-white/10 flex flex-col items-center text-center">
+        <div className="h-16 w-16 mb-4 rounded-full bg-white flex items-center justify-center p-2 shadow-soft ring-2 ring-secondary-container/40">
+          <img
+            alt="UTM Logo"
+            className="h-full w-auto object-contain"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuALJ0IC37RsH7JLKd8P899TSVUiIgwwZC4a-pLfFURvinhF7kAG8ZaJRUFn-Lx9Q17AoYEojN3xJAxEUQhFSc22dRmF3lwjWYhRrpgLMNymQir2fQaUKZTGv0WfX2-5EuUpQT1xXf7cZeMfwQyLCwyaW2y9r718Cd5OomWK8OcXChiWF4uo9T-PFt_RZ-oV7S5_8tWOVC3xy2vBi29FGRbuQA6CJiGtrwVDrqcEByhOPIzMr6I1iSv0MTgii6g9CMJ22XZuYuxK6A"
+          />
+        </div>
+        <h1 className="text-xl font-black text-white uppercase font-h1 serif antialiased tracking-wide">VIP Portal</h1>
+        <p className="font-body-sm text-secondary-container/90 text-sm mt-1 font-label-sm uppercase tracking-wider">
           {isSupervisor ? 'Supervisor Panel' : isCompany ? 'Company Panel' : 'Student Panel'}
         </p>
       </div>
@@ -99,10 +101,10 @@ export default function SideNavBar() {
               <span className="font-label-md text-label-md">Profile</span>
             </NavLink>
             <div className="mt-4 px-2">
-              <button 
+              <button
                 onClick={() => navigate('/company/create-listing')}
                 disabled={profile && !profile.is_approved}
-                className="w-full bg-primary-container text-on-primary font-label-md text-label-md py-3 rounded-lg hover:bg-primary transition-colors flex items-center justify-center gap-2 cursor-pointer border border-transparent shadow-sm hover:shadow-md disabled:opacity-50"
+                className="w-full bg-secondary-container text-on-secondary-fixed font-label-md text-label-md py-3 rounded-lg hover:bg-secondary-fixed-dim transition-all flex items-center justify-center gap-2 cursor-pointer border border-transparent shadow-soft hover:shadow-lift active:scale-[0.98] disabled:opacity-40"
               >
                 <span className="material-symbols-outlined text-sm">add</span>
                 Post Internship
@@ -142,25 +144,25 @@ export default function SideNavBar() {
       </div>
 
       {/* Footer Info & Logout */}
-      <div className="mt-auto border-t border-outline-variant pt-4 flex items-center gap-3 px-3 py-2">
-        <div className="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-md text-label-md overflow-hidden shrink-0">
+      <div className="mt-auto border-t border-white/10 pt-4 flex items-center gap-3 px-3 py-2">
+        <div className="w-9 h-9 rounded-full bg-secondary-container text-on-secondary-fixed flex items-center justify-center font-label-md text-label-md overflow-hidden shrink-0 ring-2 ring-white/10">
           {profile?.avatar_url ? (
             <img src={profile.avatar_url} alt="Profile" className="w-full h-full object-cover" />
           ) : initials}
         </div>
         <div className="flex-1 min-w-0">
-          <p className="font-label-sm text-label-sm text-on-surface truncate">
+          <p className="font-label-sm text-label-sm text-white truncate">
             {displayName}
           </p>
-          <p className="font-body-sm text-body-sm text-on-surface-variant text-xs truncate">
+          <p className="font-body-sm text-body-sm text-primary-fixed/60 text-xs truncate">
             {displaySub}
           </p>
         </div>
       </div>
-      <div className="border-t border-outline-variant p-2">
-        <button 
+      <div className="border-t border-white/10 p-2">
+        <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-all duration-200 scale-95 active:scale-100 font-label-md text-label-md bg-transparent border-none cursor-pointer text-left"
+          className="w-full flex items-center gap-3 px-3 py-2 text-primary-fixed/75 hover:bg-primary-container hover:text-white rounded-lg transition-all duration-200 active:scale-[0.98] font-label-md text-label-md bg-transparent border-none cursor-pointer text-left"
         >
           <span className="material-symbols-outlined">logout</span>
           Logout
@@ -172,7 +174,7 @@ export default function SideNavBar() {
   return (
     <>
       {/* Desktop sidebar — always visible on md+ */}
-      <nav className="hidden md:flex flex-col h-screen fixed left-0 top-0 z-40 w-64 overflow-y-auto border-r border-outline-variant bg-surface transition-all duration-150 ease-in-out p-4 gap-2">
+      <nav className="hidden md:flex flex-col h-screen fixed left-0 top-0 z-40 w-64 overflow-y-auto border-r border-primary-container bg-primary text-on-primary transition-all duration-150 ease-in-out p-4 gap-2">
         {navContent}
       </nav>
 
@@ -185,12 +187,12 @@ export default function SideNavBar() {
       )}
 
       {/* Mobile sidebar — slides in from left */}
-      <nav className={`md:hidden flex flex-col h-screen fixed left-0 top-0 z-50 w-64 overflow-y-auto border-r border-outline-variant bg-surface p-4 gap-2 transition-transform duration-300 ease-in-out ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <nav className={`md:hidden flex flex-col h-screen fixed left-0 top-0 z-50 w-64 overflow-y-auto border-r border-primary-container bg-primary text-on-primary p-4 gap-2 transition-transform duration-300 ease-in-out ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         {/* Close button for mobile */}
         <div className="flex justify-end mb-2">
-          <button 
+          <button
             onClick={() => setMobileOpen(false)}
-            className="text-on-surface-variant hover:text-primary p-1 bg-transparent border-none cursor-pointer rounded-full hover:bg-surface-container transition-colors"
+            className="text-primary-fixed/80 hover:text-white p-1 bg-transparent border-none cursor-pointer rounded-full hover:bg-primary-container transition-colors"
           >
             <span className="material-symbols-outlined">close</span>
           </button>

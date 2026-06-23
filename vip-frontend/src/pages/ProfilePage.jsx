@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
+import { Pencil } from 'lucide-react';
 import SideNavBar from '../components/SideNavBar';
 import TopNavBar from '../components/TopNavBar';
+import PageHeader from '../components/ui/PageHeader';
+import Button from '../components/ui/Button';
 
 export default function ProfilePage() {
   const navigate = useNavigate();
@@ -77,19 +80,14 @@ export default function ProfilePage() {
         
         <div className="p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto w-full flex-1 flex flex-col gap-gutter">
           {/* Page Header */}
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-base border-b border-outline-variant">
-            <div>
-              <h2 className="font-h1 text-h1 text-primary">Profile</h2>
-              <p className="font-body-md text-body-md text-on-surface-variant mt-1">Manage your professional or academic details.</p>
-            </div>
-            <button 
-              onClick={() => navigate('/profile-setup')}
-              className="bg-primary text-on-primary px-4 py-2 rounded font-label-md text-label-md hover:opacity-95 transition-colors flex items-center gap-2 cursor-pointer"
-            >
-              <span className="material-symbols-outlined text-[18px]">edit</span>
-              Edit Profile
-            </button>
-          </div>
+          <PageHeader
+            title="Profile"
+            subtitle="Manage your professional or academic details."
+          >
+            <Button onClick={() => navigate('/profile-setup')}>
+              <Pencil size={16} /> Edit Profile
+            </Button>
+          </PageHeader>
 
           {/* Bento Grid Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-gutter mt-4">

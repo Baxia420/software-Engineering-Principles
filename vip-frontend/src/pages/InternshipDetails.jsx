@@ -113,7 +113,7 @@ export default function InternshipDetails() {
             {/* Right Column (Sticky Summary) */}
             <div className="lg:col-span-4">
               <aside className="sticky top-24 bg-surface-container-lowest border border-outline-variant rounded p-6 shadow-sm">
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#C4860A] rounded-l"></div>
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-secondary-container rounded-l"></div>
                 <h3 className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-6 pb-4 border-b border-surface-variant">Internship Details</h3>
                 <div className="space-y-5 mb-8">
                   <div>
@@ -130,7 +130,7 @@ export default function InternshipDetails() {
                 {role === 'student' && (
                   <button 
                     onClick={() => navigate(`/apply?id=${listing.id}`)}
-                    className="w-full bg-[#6B1B1B] hover:bg-[#4d0408] text-[#ffffff] font-label-md text-label-md py-3.5 px-4 rounded transition-colors flex items-center justify-center gap-2 border border-transparent cursor-pointer"
+                    className="w-full bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md py-3.5 px-4 rounded transition-colors flex items-center justify-center gap-2 border border-transparent cursor-pointer shadow-soft hover:shadow-lift"
                   >
                     <span>Apply Now</span>
                     <span className="material-symbols-outlined text-[18px]">arrow_forward</span>

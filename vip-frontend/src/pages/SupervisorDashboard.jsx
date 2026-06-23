@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
+import { Trash2 } from 'lucide-react';
 import SideNavBar from '../components/SideNavBar';
 import TopNavBar from '../components/TopNavBar';
+import StatusBadge from '../components/ui/StatusBadge';
+import Button from '../components/ui/Button';
+import PageHeader from '../components/ui/PageHeader';
 
 export default function SupervisorDashboard() {
   const navigate = useNavigate();
@@ -131,35 +135,35 @@ export default function SupervisorDashboard() {
 
         <div className="p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto w-full flex flex-col gap-gutter mt-4 mb-8">
           {/* Welcome Header */}
-          <div className="mb-2">
-            <h1 className="font-h1 text-h1 text-on-surface mb-2 font-bold font-h1 serif">UTM Admin Supervisor Panel</h1>
-            <p className="font-body-lg text-body-lg text-on-surface-variant">Moderate registered industry partners and peer discussion forums.</p>
-          </div>
+          <PageHeader
+            title="UTM Admin Supervisor Panel"
+            subtitle="Moderate registered industry partners and peer discussion forums."
+          />
 
           {/* Stats Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-surface-container-lowest border border-outline-variant border-l-4 border-l-[#C4860A] rounded-DEFAULT p-6 flex items-center justify-between shadow-sm">
+            <div className="bg-surface-container-lowest border border-outline-variant border-l-4 border-l-secondary-container rounded-lg shadow-soft p-6 flex items-center justify-between shadow-sm">
               <div>
                 <p className="font-label-sm text-on-surface-variant text-label-sm uppercase tracking-wider mb-1">Total Students</p>
                 <p className="font-h1 text-on-surface text-h1 font-bold">{stats.students}</p>
               </div>
               <span className="material-symbols-outlined text-secondary text-[32px]">school</span>
             </div>
-            <div className="bg-surface-container-lowest border border-outline-variant border-l-4 border-l-[#C4860A] rounded-DEFAULT p-6 flex items-center justify-between shadow-sm">
+            <div className="bg-surface-container-lowest border border-outline-variant border-l-4 border-l-secondary-container rounded-lg shadow-soft p-6 flex items-center justify-between shadow-sm">
               <div>
                 <p className="font-label-sm text-on-surface-variant text-label-sm uppercase tracking-wider mb-1">Industry Partners</p>
                 <p className="font-h1 text-on-surface text-h1 font-bold">{stats.companies}</p>
               </div>
               <span className="material-symbols-outlined text-secondary text-[32px]">corporate_fare</span>
             </div>
-            <div className="bg-surface-container-lowest border border-outline-variant border-l-4 border-l-[#C4860A] rounded-DEFAULT p-6 flex items-center justify-between shadow-sm">
+            <div className="bg-surface-container-lowest border border-outline-variant border-l-4 border-l-secondary-container rounded-lg shadow-soft p-6 flex items-center justify-between shadow-sm">
               <div>
                 <p className="font-label-sm text-on-surface-variant text-label-sm uppercase tracking-wider mb-1">Pending Approvals</p>
                 <p className="font-h1 text-on-surface text-h1 font-bold">{stats.pending}</p>
               </div>
               <span className="material-symbols-outlined text-secondary text-[32px]">pending_actions</span>
             </div>
-            <div className="bg-surface-container-lowest border border-outline-variant border-l-4 border-l-[#C4860A] rounded-DEFAULT p-6 flex items-center justify-between shadow-sm">
+            <div className="bg-surface-container-lowest border border-outline-variant border-l-4 border-l-secondary-container rounded-lg shadow-soft p-6 flex items-center justify-between shadow-sm">
               <div>
                 <p className="font-label-sm text-on-surface-variant text-label-sm uppercase tracking-wider mb-1">Active Positions</p>
                 <p className="font-h1 text-on-surface text-h1 font-bold">{stats.internships}</p>
@@ -181,31 +185,29 @@ export default function SupervisorDashboard() {
                         <p className="font-body-sm text-body-sm text-on-surface-variant">Recruiter: {company.first_name} {company.last_name}</p>
                         <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">{company.bio || 'No description provided.'}</p>
                         {company.rejection_reason && (
-                          <p className="text-xs text-[#6B1B1B] bg-[#6B1B1B]/5 border border-[#6B1B1B]/15 p-2 rounded mt-2 font-medium">
+                          <p className="text-xs text-primary-container bg-primary-container/5 border border-primary-container/15 p-2 rounded mt-2 font-medium">
                             ⚠️ Correction Feedback: "{company.rejection_reason}"
                           </p>
                         )}
                       </div>
-                      <div className="flex gap-2 shrink-0">
+                      <div className="flex gap-2 shrink-0 items-center">
                         {company.is_approved ? (
-                          <span className="text-green-700 bg-green-600/10 px-3 py-1 rounded text-xs font-bold uppercase tracking-wider">Verified</span>
+                          <StatusBadge status="accepted" label="Verified" />
                         ) : (
                           <>
-                            <button 
-                              onClick={() => handleApproveCompany(company.id)}
-                              className="bg-primary text-on-primary px-3 py-1.5 rounded font-label-sm text-label-sm hover:opacity-90 cursor-pointer border-none"
-                            >
+                            <Button size="sm" onClick={() => handleApproveCompany(company.id)}>
                               Approve
-                            </button>
-                            <button 
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="secondary"
                               onClick={() => {
                                 setRejectionCompanyId(company.id);
                                 setFeedbackText('');
                               }}
-                              className="bg-transparent border border-[#6B1B1B] text-[#6B1B1B] px-3 py-1.5 rounded font-label-sm text-label-sm hover:bg-[#6B1B1B]/5 transition-colors cursor-pointer"
                             >
                               Reject / Flag
-                            </button>
+                            </Button>
                           </>
                         )}
                       </div>
@@ -237,10 +239,10 @@ export default function SupervisorDashboard() {
                         </div>
                         <button 
                           onClick={() => handleDeleteThread(thread.id)}
-                          className="text-error hover:bg-error-container/20 p-2 rounded cursor-pointer shrink-0 bg-transparent border-none"
+                          className="text-error hover:bg-error-container/20 p-2 rounded cursor-pointer shrink-0 bg-transparent border-none transition-colors"
                           title="Delete thread"
                         >
-                          <span className="material-symbols-outlined text-[20px]">delete</span>
+                          <Trash2 size={18} />
                         </button>
                       </div>
                     );
@@ -258,7 +260,7 @@ export default function SupervisorDashboard() {
       {rejectionCompanyId && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
           <div className="bg-surface-container-lowest border border-outline-variant rounded-xl max-w-md w-full p-6 shadow-2xl relative">
-            <h3 className="font-h3 text-h3 text-[#6B1B1B] serif font-bold mb-2">Request Profile Changes</h3>
+            <h3 className="font-h3 text-h3 text-primary-container serif font-bold mb-2">Request Profile Changes</h3>
             <p className="font-body-sm text-body-sm text-on-surface-variant mb-4">Provide clear feedback to the company partner explaining why their registration is rejected or flagged. They will see this feedback when they log in.</p>
             
             <textarea 
@@ -283,7 +285,7 @@ export default function SupervisorDashboard() {
               <button 
                 onClick={submitRejection}
                 disabled={!feedbackText.trim()}
-                className="px-5 py-2 bg-[#6B1B1B] text-white rounded font-label-md hover:opacity-90 disabled:opacity-50 cursor-pointer border border-transparent"
+                className="px-5 py-2 bg-primary-container text-white rounded font-label-md hover:opacity-90 disabled:opacity-50 cursor-pointer border border-transparent"
               >
                 Submit & Flag
               </button>
