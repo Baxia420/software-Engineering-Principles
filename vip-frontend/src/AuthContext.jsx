@@ -16,11 +16,11 @@ export function AuthProvider({ children }) {
 
   async function refreshProfile(userId) {
     try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', userId)
-        .single();
+      const timeout = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('profile fetch timeout')), 5000)
+      );
+      const query = supabase.from('profiles').select('*').eq('id', userId).single();
+      const { data } = await Promise.race([query, timeout]);
       if (data) {
         setProfile(data);
         localStorage.setItem('role', data.role || 'student');
@@ -72,6 +72,9 @@ export function AuthProvider({ children }) {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (!active) return;
+      // INITIAL_SESSION is handled by initializeAuth — skip it here to avoid
+      // a race where this handler's setLoading(false) never fires if refreshProfile stalls
+      if (event === 'INITIAL_SESSION') return;
       if (session?.user) {
         setUser(session.user);
         await refreshProfile(session.user.id);
