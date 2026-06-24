@@ -36,7 +36,8 @@ export default function MyApplications() {
             company,
             location,
             duration,
-            stipend
+            stipend,
+            profiles(avatar_url)
           ),
           application_messages (
             id,
@@ -173,6 +174,7 @@ export default function MyApplications() {
                   delay={i * 60}
                   title={app.internships?.title || 'Unknown Role'}
                   company={app.internships?.company || 'Unknown Company'}
+                  avatarUrl={app.internships?.profiles?.avatar_url}
                   status={app.status}
                   appliedDate={new Date(app.created_at).toLocaleDateString()}
                   actionLabel="View Application"
