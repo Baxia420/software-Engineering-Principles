@@ -73,9 +73,6 @@ export default function Authentication() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    alert('Sorry signup is currently disabled, Please Contact Jobayer for more information');
-    return;
-    
     const email = document.getElementById('reg-email').value;
     const password = document.getElementById('reg-password').value;
     const firstName = document.getElementById('reg-fname').value;
